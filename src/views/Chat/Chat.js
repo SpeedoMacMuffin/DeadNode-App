@@ -1,35 +1,43 @@
 import { useState, useEffect } from "react";
-import socketClient from "socket.io-client";
+// import socketClient from "socket.io-client";
 import { Link } from "react-router-dom";
-const SERVER = "http://127.0.0.1:8000";
+// const SERVER = "http://127.0.0.1:8000";
 
-const socket = socketClient(SERVER);
+// const socket = socketClient(SERVER);
 
-export default function Chat() {
+export default function Chat({ room, socket }) {
   const [content, setContent] = useState("");
   const [username, setUsername] = useState("Anonymous");
   const [messages, setMessages] = useState([]);
+  const [inRoom, setInRoom] = useState({ room });
 
   useEffect(() => {
-    socket.on("connect", () => {
-      console.log("I am connected with the back-end!");
-      console.log("My Socket-ID = " + socket.id);
-    });
-
     socket.on("history", (msgArray) => {
       setMessages(msgArray);
     });
 
-    socket.on("newMsg", ({ content, username }) => {
+    socket.on("receiveNewMessage", ({ content, username }) => {
       const msg = {
         content,
         username,
       };
       setMessages((messages) => [...messages, msg]);
-      console.log(content, username);
     });
   }, []);
+  useEffect(() => {
+    console.log("joining room");
+    socket.emit("room", { room: "chat-room" });
+    socket.emit("history");
 
+    return () => {
+      if (room) {
+        console.log("leaving room");
+        socket.emit("leave room", {
+          room: "chat-room",
+        });
+      }
+    };
+  }, [room]);
   const submit = (event) => {
     let message = { content, username, date: Date() };
     event.preventDefault();
@@ -40,7 +48,8 @@ export default function Chat() {
 
   return (
     <div>
-      <h1>Hello world</h1>
+      <span></span>
+      <h1>Hello {username}</h1>
       <input
         type="text"
         onChange={(e) => setUsername(e.target.value)}
@@ -64,9 +73,9 @@ export default function Chat() {
       {messages.map((iteration) => {
         return (
           <div>
-            <span>{iteration.content}</span>
-            <br></br>
             <span>{iteration.username}</span>
+            <br></br>
+            <span>{iteration.content}</span>
             <br></br>
           </div>
         );
