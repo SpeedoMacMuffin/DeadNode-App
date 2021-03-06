@@ -1,13 +1,29 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import "../node_modules/picnic/picnic.min.css";
+@font-face {
+  font-family: "White Rabbit";
+  src: url("./Fonts/whiterabbit/WHITERABBIT.TTF");
+  font-weight: normal;
+  font-style: normal;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+  --bg-color: #414141;
+  --bx-shadow: (
+    6px 6px 5px 0px rgba(0, 0, 0, 0.25) ; -webkit-box-shadow: 6px 6px 5px 0px rgba(
+        0,
+        0,
+        0,
+        0.25
+      ) ; -moz-box-shadow: 6px 6px 5px 0px rgba(0, 0, 0, 0.25)
+  );
+  --f-color: #cfcfcf;
+  --f-color2: rgb(150, 9, 9) f;
+}
+
+body {
+  margin: 0;
+  font-family: "White Rabbit" !important;
+  letter-spacing: 1px;
+  background-color: #414141;
+  font-size: 14px;
 }

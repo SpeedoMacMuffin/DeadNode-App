@@ -1,0 +1,28 @@
+.chatView {
+  width: 95%;
+  margin: auto;
+  margin-top: 1rem;
+}
+.message-input {
+  background-color: transparent;
+  height: auto;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+}
+.message-input:focus,
+.message-input:active {
+  transition: border-color 0.2s ease-in-out;
+  border-color: hsla(104, 100%, 50%, 0.5);
+}
+
+.send-form {
+  width: 95%;
+  margin: auto;
+  padding-top: 10px;
+  border-top: 1px solid hsla(104, 100%, 50%, 0.5);
+  bottom: 7px;
+}
+.send-button {
+  background: hsla(104, 100%, 50%, 0.5);
+}

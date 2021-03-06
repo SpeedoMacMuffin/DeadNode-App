@@ -1,16 +1,11 @@
 import { useState, useEffect } from "react";
-// import socketClient from "socket.io-client";
-import { Link } from "react-router-dom";
-// const SERVER = "http://127.0.0.1:8000";
+import ChatList from "../../Components/ChatList";
+import "./styles.css";
 
-// const socket = socketClient(SERVER);
-
-export default function Chat({ room, socket }) {
+export default function Chat({ room, socket, username }) {
   const [content, setContent] = useState("");
-  const [username, setUsername] = useState("Anonymous");
   const [messages, setMessages] = useState([]);
-  const [inRoom, setInRoom] = useState({ room });
-
+  const [newMsg, setNewMsg] = useState(false);
   useEffect(() => {
     socket.on("history", (msgArray) => {
       setMessages(msgArray);
@@ -39,47 +34,36 @@ export default function Chat({ room, socket }) {
     };
   }, [room]);
   const submit = (event) => {
-    let message = { content, username, date: Date() };
-    event.preventDefault();
-    socket.emit("newMessage", message);
-    setMessages([...messages, message]);
-    setContent("");
+    if (content.replace(/\s/g, "") == "") {
+      setContent("");
+    } else {
+      const message = { content, username };
+      event.preventDefault();
+      socket.emit("newMessage", message);
+      setMessages([...messages, message]);
+      setContent("");
+    }
   };
 
   return (
-    <div>
-      <span></span>
-      <h1>Hello {username}</h1>
-      <input
-        type="text"
-        onChange={(e) => setUsername(e.target.value)}
-        value={username}
-      />
+    <div className="chatView one">
+      <ChatList list={messages} newMsg={newMsg} />
 
-      <form onSubmit={submit} id="form">
+      <form onSubmit={submit} id="form" className="send-form">
         <input
           type="text"
           onChange={(e) => setContent(e.target.value)}
           value={content}
           id="text"
+          placeholder="Enter Message..."
+          className="four-fifth message-input"
+          required
         />
 
-        <button id="submit" type="submit">
+        <button id="submit" type="submit" className="fifth send-button">
           Send
         </button>
       </form>
-      <Link to="/files">Files</Link>
-
-      {messages.map((iteration) => {
-        return (
-          <div>
-            <span>{iteration.username}</span>
-            <br></br>
-            <span>{iteration.content}</span>
-            <br></br>
-          </div>
-        );
-      })}
     </div>
   );
 }
