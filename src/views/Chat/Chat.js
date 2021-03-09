@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import ChatList from "../../Components/ChatList";
 import "./styles.css";
+import FormMessage from "../../Components/FormMessage";
 
 export default function Chat({ room, username, socket }) {
   const [content, setContent] = useState("");
@@ -50,21 +51,7 @@ export default function Chat({ room, username, socket }) {
     <div className="chat-view one">
       <ChatList list={messages} newMsg={newMsg} />
 
-      <form onSubmit={submit} id="form" className="send-form">
-        <input
-          type="text"
-          onChange={(e) => setContent(e.target.value)}
-          value={content}
-          id="text"
-          placeholder="Enter Message..."
-          className="four-fifth message-input"
-          required
-        />
-
-        <button id="submit" type="submit" className="fifth send-button">
-          Send
-        </button>
-      </form>
+      <FormMessage submit={submit} content={content} setContent={setContent} />
     </div>
   );
 }
