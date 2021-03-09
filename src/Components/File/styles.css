@@ -1,0 +1,22 @@
+.button.file-button {
+  text-align: left;
+}
+.file-button:hover {
+  /* background: hsla(110, 96%, 28%, 0.25); */
+  color: chartreuse;
+}
+
+.file-card {
+  border: 1px solid hsla(104, 100%, 50%, 0.125);
+  border-radius: 5px;
+  background-color: transparent;
+  width: 95%;
+  margin: 0.8rem auto;
+
+  box-shadow: 6px 6px 5px 0px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 6px 6px 5px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 6px 6px 5px 0px rgba(0, 0, 0, 0.25);
+}
+.file-card:nth-child(even) {
+  background-color: hsla(110, 96%, 28%, 0.05);
+}

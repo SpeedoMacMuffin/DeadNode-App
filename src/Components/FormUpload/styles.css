@@ -1,0 +1,11 @@
+input[type="file"] {
+  background-color: transparent;
+  width: 50%;
+  color: greenyellow;
+  display: none;
+}
+
+.progress-bar {
+  border-top: 1px dotted chartreuse;
+  margin: auto;
+}

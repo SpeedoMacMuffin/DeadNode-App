@@ -1,0 +1,14 @@
+.file-table {
+  overflow-y: scroll;
+  height: 67vh;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  margin: auto;
+  width: 100%;
+}
+.file-table-header {
+  padding-top: 0.6rem;
+  background: rgba(0, 0, 0, 0.158) !important;
+  color: chartreuse;
+}

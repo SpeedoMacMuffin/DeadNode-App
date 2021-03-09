@@ -2,7 +2,7 @@ import "./styles.css";
 import React, { useEffect, useState } from "react";
 import { Switch, Route, NavLink } from "react-router-dom";
 import axios from "axios";
-import Storage from "../../Components/Storage";
+import LocalStorage from "../../Components/LocalStorage";
 
 export default function Files({ socket, room }) {
   const [file, setFile] = useState();
@@ -47,7 +47,11 @@ export default function Files({ socket, room }) {
 
   return (
     <div className="file-view">
-      <Storage storageName="[local storage]" socket={socket} files={allFiles} />
+      <LocalStorage
+        storageName="[local storage]"
+        socket={socket}
+        files={allFiles}
+      />
     </div>
   );
 }
