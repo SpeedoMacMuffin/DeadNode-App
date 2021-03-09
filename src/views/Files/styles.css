@@ -1,17 +1,15 @@
-.fileView {
-  margin-top: 5vh;
+.file-view {
   height: 94vh;
-  width: 95%;
+  /* width: 95%; */
   margin: auto;
-  overflow-y: scroll;
-  scroll-behavior: smooth;
-  -ms-overflow-style: none;
+  padding-top: 10vh;
   scrollbar-width: none;
 }
 .file-storage-button {
   background-color: hsla(110, 96%, 28%, 0.05);
   margin: auto;
   padding: 1em;
+  cursor: pointer;
 }
 .file-storage-button:hover {
   background-color: rgb(0, 0, 0);
@@ -20,4 +18,56 @@
 .file-storage-button img {
   margin: auto;
   padding: 0;
+}
+
+input[type="file"] {
+  background-color: transparent;
+  width: 50%;
+  color: greenyellow;
+  display: none;
+}
+
+.progress-bar {
+  border-top: 1px dotted chartreuse;
+  margin: auto;
+}
+
+.file-table {
+  overflow-y: scroll;
+  height: 67vh;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  margin: auto;
+  width: 100%;
+}
+.file-table-header {
+  padding-top: 0.6rem;
+  background: rgba(0, 0, 0, 0.158) !important;
+  color: chartreuse;
+}
+.button.file-button {
+  margin: 0;
+  background-color: red;
+  font-size: 0.8em;
+  text-align: left;
+}
+.file-button:hover {
+  background: hsla(110, 96%, 28%, 0.4);
+  color: chartreuse;
+}
+.file-card {
+  border: 1px solid hsla(104, 100%, 50%, 0.125);
+  border-radius: 5px;
+  /* text-align: left; */
+  background-color: transparent;
+  width: 95%;
+  margin: 0.8rem auto;
+
+  box-shadow: 6px 6px 5px 0px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 6px 6px 5px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 6px 6px 5px 0px rgba(0, 0, 0, 0.25);
+}
+.file-card:nth-child(even) {
+  background-color: hsla(110, 96%, 28%, 0.05);
 }

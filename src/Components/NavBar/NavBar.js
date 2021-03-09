@@ -14,7 +14,7 @@ export default function NavBar({ is }) {
       </label>
       <div className="menu ">
         <NavLink
-          className="button pseudo icon-puzzle"
+          className="button pseudo"
           to="/chat"
           onClick={() => setIsIn(true)}
         >

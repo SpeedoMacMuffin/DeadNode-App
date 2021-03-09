@@ -8,9 +8,9 @@ export default function Message({ content, username }) {
     //   </header>
     //   <footer>{content}</footer>
     // </article>
-    <div className="card one ">
+    <div className=" message one ">
       <div className="message-user one ">
-        <h5>{username}</h5>
+        <h4>{username}</h4>
       </div>
       <div className="message-content one">{content}</div>
     </div>

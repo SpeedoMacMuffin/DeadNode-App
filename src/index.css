@@ -6,24 +6,10 @@
   font-style: normal;
 }
 
-:root {
-  --bg-color: #414141;
-  --bx-shadow: (
-    6px 6px 5px 0px rgba(0, 0, 0, 0.25) ; -webkit-box-shadow: 6px 6px 5px 0px rgba(
-        0,
-        0,
-        0,
-        0.25
-      ) ; -moz-box-shadow: 6px 6px 5px 0px rgba(0, 0, 0, 0.25)
-  );
-  --f-color: #cfcfcf;
-  --f-color2: rgb(150, 9, 9) f;
-}
-
 body {
   margin: 0;
   font-family: "White Rabbit" !important;
   letter-spacing: 1px;
   background-color: #414141;
-  font-size: 14px;
+  font-size: 12px;
 }

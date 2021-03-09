@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import ChatList from "../../Components/ChatList";
 import "./styles.css";
 
-export default function Chat({ room, socket, username }) {
+export default function Chat({ room, username, socket }) {
   const [content, setContent] = useState("");
   const [messages, setMessages] = useState([]);
   const [newMsg, setNewMsg] = useState(false);
@@ -18,8 +18,6 @@ export default function Chat({ room, socket, username }) {
       };
       setMessages((messages) => [...messages, msg]);
     });
-  }, []);
-  useEffect(() => {
     console.log("joining room");
     socket.emit("room", { room: "chat-room" });
     socket.emit("history");
@@ -32,21 +30,24 @@ export default function Chat({ room, socket, username }) {
         });
       }
     };
-  }, [room]);
+  }, []);
+
   const submit = (event) => {
     if (content.replace(/\s/g, "") == "") {
+      event.preventDefault();
       setContent("");
     } else {
       const message = { content, username };
       event.preventDefault();
       socket.emit("newMessage", message);
       setMessages([...messages, message]);
+      setNewMsg(true);
       setContent("");
     }
   };
 
   return (
-    <div className="chatView one">
+    <div className="chat-view one">
       <ChatList list={messages} newMsg={newMsg} />
 
       <form onSubmit={submit} id="form" className="send-form">

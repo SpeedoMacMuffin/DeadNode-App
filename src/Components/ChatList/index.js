@@ -5,7 +5,7 @@ export default function ChatList({ list, newMsg }) {
   const [showNewMsg, setShowNewMsg] = useState({ newMsg });
   const bottomMsg = useRef();
   useEffect(() => {
-    if (bottomMsg.current) {
+    if (bottomMsg.current || newMsg) {
       setShowNewMsg(false);
       document.getElementById("bottom-msg").scrollIntoView({
         behavior: "smooth",
@@ -13,9 +13,10 @@ export default function ChatList({ list, newMsg }) {
         inline: "nearest",
       });
     }
-  });
+  }, [list]);
   return (
     <div className="chatList">
+      <div className="message-empty"></div>
       {list.map((iteration, idx) => {
         return (
           <Message

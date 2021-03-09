@@ -6,19 +6,19 @@
   color: rgba(255, 255, 255, 0.75);
 }
 nav {
-  position: absolute;
   background: rgba(35, 133, 0, 0.85);
   margin: auto;
+  position: absolute;
+  /* height: 2em; */
+  font-size: 1rem;
 }
-nav .burger ~ .menu {
-  background: rgba(27, 102, 0, 0.8);
-}
+
 .username-form {
   position: relative;
   top: 50%;
 }
 
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 60em) {
   .App {
     width: 50%;
     border: 1px solid rgba(128, 255, 0, 0.125);
@@ -29,5 +29,19 @@ nav .burger ~ .menu {
   }
   nav {
     width: 50%;
+  }
+}
+
+@media only screen and (max-width: 60em) {
+  /* nav {
+    position: absolute;
+  } */
+  nav .burger ~ .menu,
+  nav .show:checked ~ .burger {
+    height: 100vh;
+    top: 2em;
+  }
+  nav .burger ~ .menu {
+    background: rgba(27, 102, 0, 0.8);
   }
 }

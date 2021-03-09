@@ -1,7 +1,7 @@
-.chatView {
-  width: 95%;
+.chat-view {
   margin: auto;
-  margin-top: 1rem;
+  height: 99vh;
+  margin-top: 0.04rem;
 }
 .message-input {
   background-color: transparent;
@@ -17,11 +17,10 @@
 }
 
 .send-form {
-  width: 95%;
+  width: 97%;
   margin: auto;
   padding-top: 10px;
   border-top: 1px solid hsla(104, 100%, 50%, 0.5);
-  bottom: 7px;
 }
 .send-button {
   background: hsla(104, 100%, 50%, 0.5);

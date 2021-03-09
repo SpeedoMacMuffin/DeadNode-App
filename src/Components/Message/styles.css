@@ -1,6 +1,7 @@
-.card {
+.message {
   border: 1px solid hsla(104, 100%, 50%, 0.125);
   border-radius: 5px;
+  text-align: left;
   background-color: transparent;
   padding: 0.25rem;
   width: 95%;
@@ -9,22 +10,22 @@
   -webkit-box-shadow: 6px 6px 5px 0px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 6px 6px 5px 0px rgba(0, 0, 0, 0.25);
 }
-.card:nth-child(even) {
+.message:nth-child(even) {
   background-color: hsla(110, 96%, 28%, 0.05);
 }
-.card:last-of-type {
+.message:last-of-type {
   margin-bottom: 0;
 }
 
 .message-user {
   border-bottom: 1px ridge grey;
   line-height: 0.1rem;
-  font-size: 0.6rem;
-  letter-spacing: 0.2rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.1rem;
 }
 .message-content {
   padding: 0.2rem;
   margin-top: 0.2rem;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: white;
 }

@@ -14,22 +14,11 @@ import socketClient from "socket.io-client";
 const SERVER = "http://127.0.0.1:8000";
 
 const socket = socketClient(SERVER);
-
 function App() {
   const [inRoom, setInRoom] = useState(false);
   const [username, setUsername] = useState("");
   const [content, setContent] = useState("");
-  useEffect(() => {
-    socket.on("connection", () => {
-      console.log("I am connected with the back-end!");
-      console.log("My Socket-ID = " + socket.id);
-      if (inRoom) {
-        socket.emit("leave room", {
-          room: "chat-room",
-        });
-      }
-    });
-  }, []);
+
   const validatedContent = (name) => {
     if (name.replace(/\s/g, "") == "") {
       alert("Please enter a task");
@@ -65,10 +54,10 @@ function App() {
 
           <Switch>
             <Route path="/chat">
-              <Chat room={inRoom} socket={socket} username={username} />
+              <Chat room={inRoom} username={username} socket={socket} />
             </Route>
             <Route path="/files">
-              <Files socket={socket} room={inRoom} />
+              <Files room={inRoom} socket={socket} />
             </Route>
           </Switch>
         </Router>
