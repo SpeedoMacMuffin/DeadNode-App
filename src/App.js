@@ -10,6 +10,7 @@ import Chat from "./views/Chat/Chat";
 import Files from "./views/Files/Files";
 import Start from "./views/Start/Start";
 import NavBar from "./Components/NavBar/NavBar";
+import FormUsername from "./Components/FormUsername";
 import socketClient from "socket.io-client";
 const SERVER = "http://127.0.0.1:8000";
 
@@ -21,7 +22,7 @@ function App() {
 
   const validatedContent = (name) => {
     if (name.replace(/\s/g, "") == "") {
-      alert("Please enter a task");
+      alert("Please enter a username");
     } else {
       setUsername(name);
     }
@@ -29,25 +30,12 @@ function App() {
   return (
     <div className="App">
       {username === "" ? (
-        <form
-          onSubmit={() => validatedContent(content)}
-          id="form"
-          className="send-form five username-form center"
-        >
-          <input
-            type="text"
-            onChange={(e) => setContent(e.target.value)}
-            value={content}
-            id="text"
-            placeholder="Enter Username..."
-            className="four-fifth message-input"
-            required
-          />
-
-          <button id="submit" type="submit" className="fifth send-button">
-            Send
-          </button>
-        </form>
+        <FormUsername
+          content={content}
+          setContent={setContent}
+          username={username}
+          setUsername={setUsername}
+        />
       ) : (
         <Router>
           <NavBar in={inRoom} />
