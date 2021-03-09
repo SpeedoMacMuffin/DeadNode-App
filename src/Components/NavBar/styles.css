@@ -1,0 +1,28 @@
+nav {
+  background: rgba(35, 133, 0, 0.85);
+  margin: auto;
+  position: absolute;
+  /* height: 2em; */
+  font-size: 1rem;
+}
+@media only screen and (min-width: 60em) {
+  nav .burger ~ .menu {
+    background: transparent;
+  }
+  nav {
+    width: 50%;
+  }
+}
+@media only screen and (max-width: 60em) {
+  /* nav {
+      position: absolute;
+    } */
+  nav .burger ~ .menu,
+  nav .show:checked ~ .burger {
+    height: 100vh;
+    top: 3em;
+  }
+  nav .burger ~ .menu {
+    background: rgba(27, 102, 0, 0.8);
+  }
+}
