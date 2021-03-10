@@ -1,10 +1,8 @@
 import "./styles.css";
-import { useState } from "react";
 
 export default function FormUpload({
   onSubmit,
   uploadPercentage,
-  file,
   setFile,
   filename,
   setFilename,

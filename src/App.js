@@ -1,10 +1,5 @@
-import { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  NavLink,
-} from "react-router-dom";
+import { useState } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Chat from "./views/Chat/Chat";
 import Files from "./views/Files/Files";
