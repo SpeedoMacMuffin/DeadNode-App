@@ -56,7 +56,7 @@ export default function LocalStorage({ storageName, socket, files }) {
         filename={filename}
         setFilename={setFilename}
       />
-      <FileTable files={files} />
+      <FileTable files={files} socket={socket} />
     </div>
   );
 }
