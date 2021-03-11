@@ -43,6 +43,10 @@ function App() {
             <Route path="/files">
               <Files room={inRoom} socket={socket} />
             </Route>
+            <Route path="/admin">
+              {/* <Admin room={inRoom} socket={socket} /> */}
+              admin view
+            </Route>
           </Switch>
         </Router>
       )}
