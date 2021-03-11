@@ -16,7 +16,7 @@ export default function Files({ socket, room }) {
   useEffect(() => {
     socket.on("loadNewFile", async () => {
       try {
-        const res = await axios.get("http://localhost:4000/local");
+        const res = await axios.get("http://deadnode.io:4000/local");
         setAllFiles(res.data.data);
       } catch (err) {
         console.log(err);
@@ -25,7 +25,7 @@ export default function Files({ socket, room }) {
   });
   useEffect(async () => {
     try {
-      const res = await axios.get("http://localhost:4000/local");
+      const res = await axios.get("http://deadnode.io:4000/local");
       setAllFiles(res.data.data);
       console.log(allFiles);
     } catch (err) {

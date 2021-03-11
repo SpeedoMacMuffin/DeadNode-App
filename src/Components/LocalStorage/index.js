@@ -18,7 +18,7 @@ export default function LocalStorage({ storageName, socket, files }) {
     formData.append("file", file);
 
     try {
-      const res = await axios.post("http://localhost:4000/upload", formData, {
+      const res = await axios.post("http://deadnode.io:4000/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -37,12 +37,9 @@ export default function LocalStorage({ storageName, socket, files }) {
       setFilename("");
       socket.emit("newFile");
       console.log(uploadedFile);
-    } catch (err) {
-      if (err.response.status === 500) {
-        setMessage("There was a problem with the server");
-      } else {
+    } catch (err) { 
         setMessage(err.response.data.message);
-      }
+      console.log(err)
     }
   };
 

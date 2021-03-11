@@ -1,8 +1,8 @@
 import "./styles.css";
 
 export default function File({ name }) {
-  const downloadUrl = `http://localhost:4000/download/${name}`;
-  const fileUrl = `http://localhost:4000/upload/${name}`;
+  const downloadUrl = `http://deadnode.io:4000/download/${name}`;
+  const fileUrl = `http://deadnode.io:4000/upload/${name}`;
   return (
     <div className="flex five file-card">
       <a

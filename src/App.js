@@ -12,7 +12,7 @@ import Start from "./views/Start/Start";
 import NavBar from "./Components/NavBar/NavBar";
 import FormUsername from "./Components/FormUsername";
 import socketClient from "socket.io-client";
-const SERVER = "http://127.0.0.1:8000";
+const SERVER = "http://deadnode.io:443";
 
 const socket = socketClient(SERVER);
 function App() {

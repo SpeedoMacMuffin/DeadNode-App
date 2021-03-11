@@ -1,5 +1,4 @@
 .file-table {
-  overflow-y: scroll;
   height: 67vh;
   scroll-behavior: smooth;
   -ms-overflow-style: none;
