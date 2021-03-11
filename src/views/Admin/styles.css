@@ -1,3 +1,6 @@
-.start {
-  height: 95vh;
+.admin-view {
+  height: 94vh;
+  /* width: 95%; */
+  margin: auto;
+  padding-top: 7.5vh;
 }

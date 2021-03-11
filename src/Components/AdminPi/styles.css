@@ -1,0 +1,6 @@
+.setup {
+  outline: 1px solid hsla(104, 100%, 50%, 0.25);
+}
+.setup:hover {
+  background: hsla(104, 100%, 50%, 0.5);
+}
