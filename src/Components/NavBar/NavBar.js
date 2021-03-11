@@ -31,10 +31,10 @@ export default function NavBar({ is }) {
 
         <NavLink
           className="button pseudo"
-          to="/settings"
+          to="/admin"
           onClick={() => setIsIn(false)}
         >
-          [Settings]
+          [Admin]
         </NavLink>
       </div>
     </nav>
