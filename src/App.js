@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Chat from "./views/Chat/Chat";
 import Files from "./views/Files/Files";
-import Start from "./views/Start/Start";
+import Admin from "./views/Admin/Admin";
 import NavBar from "./Components/NavBar/NavBar";
 import FormUsername from "./Components/FormUsername";
 import socketClient from "socket.io-client";
@@ -44,8 +44,7 @@ function App() {
               <Files room={inRoom} socket={socket} />
             </Route>
             <Route path="/admin">
-              {/* <Admin room={inRoom} socket={socket} /> */}
-              admin view
+              <Admin room={inRoom} socket={socket} />
             </Route>
           </Switch>
         </Router>
