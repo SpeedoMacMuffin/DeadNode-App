@@ -1,6 +1,6 @@
 import "./styles.css";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import Api from "../../Api/fileAPI";
 import FormUpload from "../FormUpload";
 import FileTable from "../FileTable";
 
@@ -8,7 +8,6 @@ export default function LocalStorage({ storageName, socket, files }) {
   const [uploadedFile, setUploadedFile] = useState({});
   const [message, setMessage] = useState();
   const [uploadPercentage, setUploadPercentage] = useState(0);
-  const [newFiles, setNewFiles] = useState([]);
   const [file, setFile] = useState();
   const [filename, setFilename] = useState("Choose file");
 
@@ -18,7 +17,7 @@ export default function LocalStorage({ storageName, socket, files }) {
     formData.append("file", file);
 
     try {
-      const res = await axios.post("http://localhost:4000/upload", formData, {
+      const res = await Api.post("/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -33,6 +32,7 @@ export default function LocalStorage({ storageName, socket, files }) {
       });
       const { fileName, filePath } = res.data;
       setUploadedFile({ fileName, filePath });
+      setMessage(message);
 
       setFilename("");
       socket.emit("newFile");

@@ -1,16 +1,17 @@
 import "./styles.css";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import Api from "../../Api/fileAPI";
+import { fileServerUrl } from "../../Api/ServerUrls";
 
 export default function File({ name }) {
-  const downloadUrl = `http://localhost:4000/download/${name}`;
-  const fileUrl = `http://localhost:4000/upload/${name}`;
+  const downloadUrl = `${fileServerUrl}/download/${name}`;
+  const fileUrl = `${fileServerUrl}/upload/${name}`;
   const [fileDetail, setFileDetail] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(async () => {
     try {
-      const res = await axios.get(`http://localhost:4000/local/${name}`);
+      const res = await Api.get(`/local/${name}`);
       setFileDetail(res.data.data);
       setLoading(false);
     } catch (err) {
@@ -20,6 +21,7 @@ export default function File({ name }) {
   if (loading) {
     return <div className="flex five center">[loading file]</div>;
   }
+
   return (
     <div className="flex five file-card">
       <a

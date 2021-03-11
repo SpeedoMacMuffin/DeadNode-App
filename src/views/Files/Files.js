@@ -1,6 +1,6 @@
 import "./styles.css";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import Api from "../../Api/fileAPI";
 import LocalStorage from "../../Components/LocalStorage";
 
 export default function Files({ socket, room }) {
@@ -9,7 +9,7 @@ export default function Files({ socket, room }) {
   useEffect(() => {
     socket.on("loadNewFile", async () => {
       try {
-        const res = await axios.get("http://localhost:4000/local");
+        const res = await Api.get("/local");
         setAllFiles(res.data.data);
       } catch (err) {
         console.log(err);
@@ -18,7 +18,7 @@ export default function Files({ socket, room }) {
   });
   useEffect(async () => {
     try {
-      const res = await axios.get("http://localhost:4000/local");
+      const res = await Api.get("/local");
       setAllFiles(res.data.data);
       console.log(allFiles);
     } catch (err) {
