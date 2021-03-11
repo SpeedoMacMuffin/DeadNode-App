@@ -4,7 +4,7 @@ export default function AdminFiles() {
   return (
     <div className="admin-files one flex center message">
       <div>
-        <h1>[File System]</h1>
+        <h1 className="center one flex">[File System]</h1>
 
         <span className="stack">Files uploaded:</span>
         <span className="stack">Used Space:</span>

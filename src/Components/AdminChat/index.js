@@ -2,7 +2,7 @@ import "./styles.css";
 
 export default function AdminChat() {
   return (
-    <div className="admin-chat one flex center message">
+    <div className="one flex center message">
       <div>
         <h1 className="center one flex">[Chat]</h1>
 
