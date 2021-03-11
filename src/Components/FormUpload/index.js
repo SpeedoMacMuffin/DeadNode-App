@@ -26,10 +26,10 @@ export default function FormUpload({
         </label>
         <input type="submit" value="[send]" className="button send-button" />
       </form>
-      {filename ? <span className="one">{filename}</span> : null}
+      {filename ? <span className="flex center">{filename}</span> : null}
       {uploadPercentage > 0 ? (
         <span
-          className="progress-bar"
+          className="progress-bar flex center"
           style={{ width: `${uploadPercentage}vw` }}
         >
           {uploadPercentage}%
