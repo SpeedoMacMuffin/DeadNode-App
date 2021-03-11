@@ -3,7 +3,6 @@
   /* width: 95%; */
   margin: auto;
   padding-top: 10vh;
-  scrollbar-width: none;
 }
 .file-storage-button {
   background-color: hsla(110, 96%, 28%, 0.05);
