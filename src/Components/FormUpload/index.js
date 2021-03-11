@@ -28,12 +28,7 @@ export default function FormUpload({
       </form>
       {filename ? <span className="flex center">{filename}</span> : null}
       {uploadPercentage > 0 ? (
-        <span
-          className="progress-bar flex center"
-          style={{ width: `${uploadPercentage}vw` }}
-        >
-          {uploadPercentage}%
-        </span>
+        <span className="flex half center">{uploadPercentage}%</span>
       ) : null}
     </div>
   );
