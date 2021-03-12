@@ -21,14 +21,23 @@ export default function FormUpload({
           id="customFile"
           onChange={onChange}
         />
-        <label htmlFor="customFile" className="button pseudo">
-          UPload
-        </label>
-        <input type="submit" value="[send]" className="button send-button" />
+        {!filename ? (
+          <label htmlFor="customFile" className="button pseudo setup">
+            [Upload File]
+          </label>
+        ) : null}
+        {filename ? (
+          <input type="submit" value="[send]" className="button send-button" />
+        ) : null}
       </form>
-      {filename ? <span className="flex center">{filename}</span> : null}
+      {filename ? <h4>{filename}</h4> : null}
       {uploadPercentage > 0 ? (
-        <span className="flex half center">{uploadPercentage}%</span>
+        <span
+          className="message upload-percentage flex center"
+          style={{ width: `${uploadPercentage}%` }}
+        >
+          {uploadPercentage}% completed!
+        </span>
       ) : null}
     </div>
   );
