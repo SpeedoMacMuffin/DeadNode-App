@@ -21,7 +21,7 @@ export default function File({ name, socket }) {
 
   const deleteHandler = async () => {
     await Api.delete(`/local/${name}`);
-    socket.emit("newFile");
+    socket.emit("delete");
     setDeleteCheck(false);
   };
   return (
