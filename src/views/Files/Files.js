@@ -20,7 +20,7 @@ export default function Files({ socket, room }) {
     try {
       const res = await Api.get("/local");
       setAllFiles(res.data.data);
-      console.log(allFiles);
+      console.log(res);
     } catch (err) {
       console.log(err);
     }
