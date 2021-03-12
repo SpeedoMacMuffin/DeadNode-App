@@ -1,6 +1,16 @@
 import "./styles.css";
+import FormSure from "../FormSure";
+import { useState } from "react";
+export default function AdminChat({ socket }) {
+  const [message, setMessage] = useState("Delete All Messages");
+  const deleteHandler = () => {
+    socket.emit("delete");
+    setMessage("Messages deleted!");
+    setTimeout(() => {
+      setMessage("Delete All Messages");
+    }, 3000);
+  };
 
-export default function AdminChat() {
   return (
     <div className="one flex center message">
       <div>
@@ -9,9 +19,7 @@ export default function AdminChat() {
         <span className="stack">Users online:</span>
         <span className="stack">Messages:</span>
         <span className="stack">Stat:</span>
-        <button className="flex center danger pseudo">
-          Delete Chat History
-        </button>
+        <FormSure name="chat" onClick={deleteHandler} message={message} />
       </div>
     </div>
   );
