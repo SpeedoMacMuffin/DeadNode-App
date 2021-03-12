@@ -9,7 +9,7 @@ export default function LocalStorage({ storageName, socket, files }) {
   const [message, setMessage] = useState();
   const [uploadPercentage, setUploadPercentage] = useState(0);
   const [file, setFile] = useState();
-  const [filename, setFilename] = useState("Choose file");
+  const [filename, setFilename] = useState("");
 
   const onSubmit = async (e) => {
     e.preventDefault();
