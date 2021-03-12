@@ -35,7 +35,7 @@ export default function LocalStorage({ storageName, socket, files }) {
       setMessage(message);
 
       setFilename("");
-      socket.emit("newFile");
+      socket.emit("files-change");
       console.log(uploadedFile);
     } catch (err) {
       if (err.response.status === 500) {
