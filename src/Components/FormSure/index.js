@@ -3,7 +3,7 @@ import "./styles.css";
 export default function FormSure({ name, onClick, message }) {
   return (
     <div>
-      <label for={name} class="button flex center danger pseudo">
+      <label htmlFor={name} className="button flex center danger pseudo">
         {message}
       </label>
 
