@@ -34,10 +34,10 @@ export default function LocalStorage({ storageName, socket, files }) {
               Math.round((progressEvent.loaded * 100) / progressEvent.total)
             )
           );
-          setTimeout(() => setUploadPercentage(0), 2000);
         },
       });
       const { fileName, filePath } = res.data;
+      setTimeout(() => setUploadPercentage(0), 1000);
       setUploadedFile({ fileName, filePath });
       setMessage(message);
 
