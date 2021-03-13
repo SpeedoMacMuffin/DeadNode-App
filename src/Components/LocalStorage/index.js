@@ -15,6 +15,13 @@ export default function LocalStorage({ storageName, socket, files }) {
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", file);
+    if (file.size > 50 * 1024 * 1024) {
+      setTimeout(() => {
+        setFilename("");
+        setFile("");
+      }, 2000);
+      return setFilename("File too large! Maximum 50MB");
+    }
 
     try {
       const res = await Api.post("/upload", formData, {
@@ -38,11 +45,8 @@ export default function LocalStorage({ storageName, socket, files }) {
       socket.emit("files-change");
       console.log(uploadedFile);
     } catch (err) {
-      if (err.response.status === 500) {
-        setMessage("There was a problem with the server");
-      } else {
-        setMessage(err.response.data.message);
-      }
+      console.log(err);
+      setMessage(err);
     }
   };
 
