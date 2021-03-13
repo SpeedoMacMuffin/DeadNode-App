@@ -9,7 +9,7 @@
   scroll-behavior: smooth;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  padding-top: 2rem;
+  padding-top: 4em;
   margin-top: 0.03em;
 }
 .chatList::-webkit-scrollbar {
