@@ -12,9 +12,18 @@ export default function FormUpload({
     setFilename(e.target.files[0].name);
     console.log(e.target.files);
   };
+  const reset = () => {
+    setFile("");
+    setFilename("");
+  };
   return (
     <div>
-      <form className="" onSubmit={onSubmit}>
+      <form
+        className=""
+        onSubmit={onSubmit}
+        // enctype="multipart/form-data"
+        // method="POST"
+      >
         <input
           className="button message"
           type="file"
@@ -23,13 +32,22 @@ export default function FormUpload({
         />
         {!filename ? (
           <label htmlFor="customFile" className="button pseudo setup">
-            [Upload File]
+            [Choose File]
           </label>
         ) : null}
         {filename ? (
           <input type="submit" value="[send]" className="button send-button" />
         ) : null}
+        {filename ? (
+          <input
+            type="reset"
+            value="[cancel]"
+            className="button pseudo danger"
+            onClick={() => reset()}
+          />
+        ) : null}
       </form>
+
       {filename ? <h4>{filename}</h4> : null}
       {uploadPercentage > 0 ? (
         <span
