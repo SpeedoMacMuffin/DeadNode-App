@@ -10,7 +10,7 @@ export default function FormUpload({
   const onChange = (e) => {
     setFile(e.target.files[0]);
     setFilename(e.target.files[0].name);
-    console.log(e.target.files);
+    console.log(e.target.files[0]);
   };
   const reset = () => {
     setFile("");
@@ -36,7 +36,11 @@ export default function FormUpload({
           </label>
         ) : null}
         {filename ? (
-          <input type="submit" value="[send]" className="button send-button" />
+          <input
+            type="submit"
+            value="[upload]"
+            className="button send-button"
+          />
         ) : null}
         {filename ? (
           <input

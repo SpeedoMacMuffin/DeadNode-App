@@ -1,11 +1,12 @@
 import "./styles.css";
 import Api from "../../Api/fileAPI";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FormSure from "../FormSure";
 
 export default function AdminFiles({ files, socket }) {
   const [message, setMessage] = useState("Delete All Files");
-  const [fileDetail, setFileDetail] = useState([]);
+  const [usedSpace, setUsedSpace] = useState("");
+  const [availableSpace, setAvailableSpace] = useState("");
 
   const deleteAll = async () => {
     if (files.length === 0) {
@@ -26,9 +27,9 @@ export default function AdminFiles({ files, socket }) {
   };
 
   return (
-    <div className="admin-files one flex center message">
+    <div className="flex center message">
       <div>
-        <h1 className="center one flex">[File System]</h1>
+        <h1 className="center flex">[File System]</h1>
 
         <span className="stack">Files uploaded: {files.length}</span>
         <span className="stack">Used Space:</span>

@@ -4,7 +4,12 @@ import Api from "../../Api/fileAPI";
 import FormUpload from "../FormUpload";
 import FileTable from "../FileTable";
 
-export default function LocalStorage({ storageName, socket, files }) {
+export default function LocalStorage({
+  storageName,
+  socket,
+  allFiles,
+  setAllFiles,
+}) {
   const [uploadedFile, setUploadedFile] = useState({});
   const [message, setMessage] = useState();
   const [uploadPercentage, setUploadPercentage] = useState(0);
@@ -36,14 +41,14 @@ export default function LocalStorage({ storageName, socket, files }) {
           );
         },
       });
-      const { fileName, filePath } = res.data;
+      const { fileName, filePath, fileSize } = res.data;
+      socket.emit("files-change", fileName);
+      console.log(file);
       setTimeout(() => setUploadPercentage(0), 1000);
-      setUploadedFile({ fileName, filePath });
+      setUploadedFile({ fileName, filePath, fileSize });
       setMessage(message);
 
       setFilename("");
-      socket.emit("files-change");
-      console.log(uploadedFile);
     } catch (err) {
       console.log(err);
       setMessage(err);
@@ -55,12 +60,12 @@ export default function LocalStorage({ storageName, socket, files }) {
       <FormUpload
         onSubmit={onSubmit}
         uploadPercentage={uploadPercentage}
-        file={file}
+        file={allFiles}
         setFile={setFile}
         filename={filename}
         setFilename={setFilename}
       />
-      <FileTable files={files} socket={socket} />
+      <FileTable files={allFiles} socket={socket} />
     </div>
   );
 }

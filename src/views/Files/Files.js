@@ -3,47 +3,40 @@ import React, { useEffect, useState } from "react";
 import Api from "../../Api/fileAPI";
 import LocalStorage from "../../Components/LocalStorage";
 
-export default function Files({ socket, room }) {
+export default function Files({ socket, room, setRoom }) {
   const [allFiles, setAllFiles] = useState([]);
 
   useEffect(() => {
-    socket.on("loadNewFile", async () => {
-      try {
-        const res = await Api.get("/local");
-        setAllFiles(res.data.data);
-      } catch (err) {
+    if (room !== "files") {
+      socket.emit("leaving room", { room });
+      setRoom("files");
+      socket.emit("room", { room: "files" });
+    }
+    socket.on("loadNewFile", (err, file) => {
+      if (err) {
         console.log(err);
       }
+      // const res = await Api.get("/local");
+      console.log(file);
+      // setAllFiles((allFiles) => [...allFiles, file]);
+      console.log(allFiles);
     });
   });
   useEffect(async () => {
     try {
       const res = await Api.get("/local");
       setAllFiles(res.data.data);
-      console.log(res);
     } catch (err) {
       console.log(err);
     }
-
-    console.log("joining room");
-    socket.emit("room", { room: "localfiles-room" });
-
-    return () => {
-      if (room) {
-        console.log("leaving room");
-        socket.emit("leave room", {
-          room: "localfiles-room",
-        });
-      }
-    };
-  }, []);
+  }, [allFiles]);
 
   return (
     <div className="file-view">
       <LocalStorage
         storageName="[local storage]"
         socket={socket}
-        files={allFiles}
+        allFiles={allFiles}
       />
     </div>
   );

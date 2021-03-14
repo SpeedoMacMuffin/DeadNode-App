@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Chat from "./views/Chat/Chat";
@@ -13,9 +13,19 @@ const SERVER = chatServerUrl;
 const socket = socketClient(SERVER);
 function App() {
   const [inRoom, setInRoom] = useState(false);
+  const [room, setRoom] = useState("home");
   const [username, setUsername] = useState("");
   const [content, setContent] = useState("");
-
+  console.log(inRoom);
+  console.log(room);
+  useEffect(() => {
+    if (room !== "home") {
+      socket.emit("leaving room", { room });
+      setRoom("home");
+      socket.emit("room", { room: "home" });
+    }
+  }, []);
+  console.log(username + " is currently in Room " + room);
   const validatedContent = (name) => {
     if (name.replace(/\s/g, "") == "") {
       alert("Please enter a username");
@@ -38,13 +48,18 @@ function App() {
 
           <Switch>
             <Route path="/chat">
-              <Chat room={inRoom} username={username} socket={socket} />
+              <Chat
+                username={username}
+                socket={socket}
+                room={room}
+                setRoom={setRoom}
+              />
             </Route>
             <Route path="/files">
-              <Files room={inRoom} socket={socket} />
+              <Files socket={socket} room={room} setRoom={setRoom} />
             </Route>
             <Route path="/admin">
-              <Admin room={inRoom} socket={socket} />
+              <Admin socket={socket} room={room} setRoom={setRoom} />
             </Route>
           </Switch>
         </Router>

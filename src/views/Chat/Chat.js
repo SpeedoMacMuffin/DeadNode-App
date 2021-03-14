@@ -3,14 +3,24 @@ import ChatList from "../../Components/ChatList";
 import "./styles.css";
 import FormMessage from "../../Components/FormMessage";
 
-export default function Chat({ room, username, socket }) {
+export default function Chat({ room, setRoom, username, socket }) {
   const [content, setContent] = useState("");
   const [messages, setMessages] = useState([]);
   const [newMsg, setNewMsg] = useState(false);
   useEffect(() => {
-    socket.on("history", (msgArray) => {
-      setMessages(msgArray);
-    });
+    if (room !== "chat") {
+      socket.emit("leaving room", { room });
+      setRoom("chat");
+      socket.emit("room", { room: "chat" });
+    }
+    socket.on(
+      "history",
+      (msgArray) => {
+        setMessages(msgArray);
+        console.log("messages received");
+      },
+      []
+    );
 
     socket.on("receiveNewMessage", ({ content, username }) => {
       const msg = {
@@ -18,19 +28,8 @@ export default function Chat({ room, username, socket }) {
         username,
       };
       setMessages((messages) => [...messages, msg]);
+      console.log("received new message");
     });
-    console.log("joining room");
-    socket.emit("room", { room: "chat-room" });
-    socket.emit("history");
-
-    return () => {
-      if (room) {
-        console.log("leaving room");
-        socket.emit("leave room", {
-          room: "chat-room",
-        });
-      }
-    };
   }, []);
 
   const submit = (event) => {

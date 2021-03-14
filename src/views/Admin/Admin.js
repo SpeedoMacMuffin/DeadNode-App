@@ -5,37 +5,50 @@ import AdminChat from "../../Components/AdminChat";
 import AdminFiles from "../../Components/AdminFiles";
 import AdminPi from "../../Components/AdminPi";
 
-export default function Admin({ socket }) {
+export default function Admin({ socket, room, setRoom }) {
   const [files, setFiles] = useState([]);
+  const [messages, setMessages] = useState([]);
+  const [clients, setClients] = useState("");
 
   useEffect(() => {
-    socket.on("loadNewFile", async () => {
-      try {
-        const res = await Api.get("/local");
-        setFiles(res.data.data);
-      } catch (err) {
-        console.log(err);
-      }
+    if (room !== "admin") {
+      socket.emit("leaving room", { room });
+      setRoom("admin");
+      socket.emit("room", { room: "admin" });
+    }
+    socket.on("loadNewFile", (fileName) => {
+      setFiles((files) => [...files, fileName]);
     });
-  });
+
+    // socket.emit("admin");
+    // socket.on("admin", (res) => {
+    //   setMessages(res);
+    // });
+    socket.emit("admin-stats");
+    socket.on("admin-stats", (stats) => {
+      setClients(stats);
+    });
+  }, []);
+
   useEffect(async () => {
     try {
       const res = await Api.get("/local");
       setFiles(res.data.data);
-      console.log(res);
     } catch (err) {
       console.log(err);
     }
   }, []);
-  console.log(files);
+
   return (
     <div className="admin-view">
       <div>
         <h1>Admin View</h1>
       </div>
-      <AdminChat socket={socket} />
-      <AdminFiles files={files} socket={socket} />
-      <AdminPi />
+      <div>
+        <AdminChat socket={socket} messages={messages} />
+        <AdminFiles files={files} socket={socket} />
+      </div>
+      <AdminPi clients={clients} />
     </div>
   );
 }
