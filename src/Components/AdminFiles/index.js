@@ -3,7 +3,7 @@ import Api from "../../Api/fileAPI";
 import { useState } from "react";
 import FormSure from "../FormSure";
 
-export default function AdminFiles({ files, socket }) {
+export default function AdminFiles({ files, setFiles, socket }) {
   const [message, setMessage] = useState("Delete All Files");
   const [usedSpace, setUsedSpace] = useState("");
   const [availableSpace, setAvailableSpace] = useState("");
@@ -18,18 +18,19 @@ export default function AdminFiles({ files, socket }) {
       await files.forEach(async (file) => {
         const res = await Api.delete("/local/" + file);
         setMessage(res.data.message);
+        setFiles([]);
       });
     } catch (err) {
       setMessage(err);
     }
-    socket.emit("files-change");
-    setTimeout(() => setMessage("Delete All Files"), 5000);
+    socket.emit("files-deleted");
+    setTimeout(() => setMessage("Delete All Files"), 3000);
   };
 
   return (
-    <div className="flex center message">
+    <div className="flex center message stats">
       <div>
-        <h1 className="center flex">[File System]</h1>
+        <h2 className="center flex">[File System]</h2>
 
         <span className="stack">Files uploaded: {files.length}</span>
         <span className="stack">Used Space:</span>
