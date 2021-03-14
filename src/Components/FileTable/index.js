@@ -1,6 +1,6 @@
 import "./styles.css";
 import File from "../File";
-export default function FileTable({ socket, files }) {
+export default function FileTable({ socket, newFiles }) {
   return (
     <div>
       <div className="flex five file-table-header file-card">
@@ -9,8 +9,16 @@ export default function FileTable({ socket, files }) {
         <div className="button pseudo flex center">DL</div>
       </div>
       <div className="file-table">
-        {files.map((iteration, idx) => {
-          return <File socket={socket} name={iteration} key={idx} />;
+        {newFiles.map((iteration, idx) => {
+          return (
+            <File
+              socket={socket}
+              name={iteration.name}
+              path={iteration.path}
+              size={iteration.size}
+              key={idx}
+            />
+          );
         })}
       </div>
     </div>
