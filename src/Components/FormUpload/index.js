@@ -32,14 +32,14 @@ export default function FormUpload({
         />
         {!filename ? (
           <label htmlFor="customFile" className="button pseudo setup">
-            [Choose File]
+            [Choose File To Upload]
           </label>
         ) : null}
         {filename ? (
           <input
             type="submit"
             value="[upload]"
-            className="button send-button"
+            className="button pseudo setup"
           />
         ) : null}
         {filename ? (
