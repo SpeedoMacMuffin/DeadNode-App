@@ -1,17 +1,21 @@
 @media screen and (min-width: 600px) {
-  .chatList {
+  .chat-list {
     margin: auto;
   }
 }
-.chatList {
+.chat-list {
   height: 90vh;
   overflow-y: scroll;
   scroll-behavior: smooth;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  padding-top: 4em;
+  padding-top: 0em;
   margin-top: 0.03em;
 }
-.chatList::-webkit-scrollbar {
+.chat-list::-webkit-scrollbar {
   display: none;
+}
+
+.message-empty {
+  opacity: 0;
 }

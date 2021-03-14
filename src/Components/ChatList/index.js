@@ -15,8 +15,8 @@ export default function ChatList({ list, newMsg }) {
     }
   }, [list]);
   return (
-    <div className="chatList">
-      <div className="message-empty"></div>
+    <div className="chat-list">
+      <div className="message-empty message">PlaceHolder</div>
       {list.map((iteration, idx) => {
         return (
           <Message
