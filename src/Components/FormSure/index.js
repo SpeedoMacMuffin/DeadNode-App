@@ -18,18 +18,18 @@ export default function FormSure({ name, onClick, message }) {
             </label>
           </header>
           <section className="content">
-            Are you sure? This will permanently delete all files and can not be
-            reversed!
+            Are you sure? This will permanently delete all content and can not
+            be reversed!
           </section>
           <footer>
             <label
               htmlFor={name}
-              className="button center half success"
+              className="button center half pseudo setup"
               onClick={onClick}
             >
-              [Delete History]
+              [Delete]
             </label>
-            <label for={name} className="button center dangerous half">
+            <label for={name} className="button center danger pseudo half">
               [Cancel]
             </label>
           </footer>
