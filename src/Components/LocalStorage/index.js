@@ -9,6 +9,7 @@ export default function LocalStorage({
   socket,
   allFiles,
   setAllFiles,
+  newFiles,
 }) {
   const [uploadedFile, setUploadedFile] = useState({});
   const [message, setMessage] = useState();
@@ -41,11 +42,11 @@ export default function LocalStorage({
           );
         },
       });
-      const { fileName, filePath, fileSize } = res.data;
-      socket.emit("files-change", fileName);
+      const { fileName, filePath } = res.data;
+      socket.emit("file-added");
       console.log(file);
       setTimeout(() => setUploadPercentage(0), 1000);
-      setUploadedFile({ fileName, filePath, fileSize });
+      setUploadedFile({ fileName, filePath });
       setMessage(message);
 
       setFilename("");
@@ -65,7 +66,7 @@ export default function LocalStorage({
         filename={filename}
         setFilename={setFilename}
       />
-      <FileTable files={allFiles} socket={socket} />
+      <FileTable files={allFiles} newFiles={newFiles} socket={socket} />
     </div>
   );
 }
