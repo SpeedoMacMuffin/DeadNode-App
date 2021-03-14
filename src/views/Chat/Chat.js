@@ -13,14 +13,10 @@ export default function Chat({ room, setRoom, username, socket }) {
       setRoom("chat");
       socket.emit("room", { room: "chat" });
     }
-    socket.on(
-      "history",
-      (msgArray) => {
-        setMessages(msgArray);
-        console.log("messages received");
-      },
-      []
-    );
+    socket.on("history", (msgArray) => {
+      setMessages(msgArray);
+      console.log("messages received");
+    });
 
     socket.on("receiveNewMessage", ({ content, username }) => {
       const msg = {
