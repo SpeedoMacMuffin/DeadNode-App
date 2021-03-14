@@ -10,8 +10,8 @@ export default function AdminPi({ clients }) {
         <span className="stack">CPU usage:</span>
         <span className="stack">RAM usage:</span>
         <span className="stack">Wireless: </span>
-        <button className="pseudo flex center setup">Wireless Setup</button>
-        <button className="pseudo flex center setup">Global Setup</button>
+        <button className="pseudo flex center setup">[Wireless Setup]</button>
+        <button className="pseudo flex center setup">[Change Password]</button>
       </div>
     </div>
   );
