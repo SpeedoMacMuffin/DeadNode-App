@@ -8,7 +8,7 @@ export default function AdminChat({ socket, messages, setMessages }) {
 
   const deleteHandler = () => {
     if (messages > 0) {
-      socket.emit("delete");
+      socket.emit("deleteMessages");
       setMessage("Messages deleted!");
       setTimeout(() => {
         setMessage("Delete All Messages");
