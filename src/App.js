@@ -4,6 +4,7 @@ import "./App.css";
 import Chat from "./views/Chat/Chat";
 import Files from "./views/Files/Files";
 import Admin from "./views/Admin/Admin";
+import Home from "./views/Home/Home";
 import NavBar from "./Components/NavBar/NavBar";
 import FormUsername from "./Components/FormUsername";
 import socketClient from "socket.io-client";
@@ -16,26 +17,10 @@ function App() {
   const [room, setRoom] = useState("home");
   const [username, setUsername] = useState("");
   const [content, setContent] = useState("");
-  console.log(inRoom);
-  console.log(room);
-  useEffect(() => {
-    if (room !== "home") {
-      socket.emit("leaving room", { room });
-      setRoom("home");
-      socket.emit("room", { room: "home" });
-    }
-  }, []);
-  console.log(username + " is currently in Room " + room);
-  const validatedContent = (name) => {
-    if (name.replace(/\s/g, "") == "") {
-      alert("Please enter a username");
-    } else {
-      setUsername(name);
-    }
-  };
+
   return (
     <div className="App">
-      {username === "" ? (
+      {!username ? (
         <FormUsername
           content={content}
           setContent={setContent}
@@ -60,6 +45,14 @@ function App() {
             </Route>
             <Route path="/admin">
               <Admin socket={socket} room={room} setRoom={setRoom} />
+            </Route>
+            <Route path="/">
+              <Home
+                username={username}
+                socket={socket}
+                room={room}
+                setRoom={setRoom}
+              />
             </Route>
           </Switch>
         </Router>
