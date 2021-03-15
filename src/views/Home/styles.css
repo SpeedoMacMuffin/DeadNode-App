@@ -1,0 +1,36 @@
+.home-view {
+  padding-top: 20%;
+  height: 90vh;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  margin: auto;
+  margin-top: 0.03em;
+  width: 95%;
+}
+
+.home-card {
+  border: 1px solid hsla(104, 100%, 50%, 0.125);
+  border-radius: 5px;
+  text-align: left;
+  background-color: transparent;
+  font-size: 1.2em;
+  /* box-shadow: 6px 6px 5px 0px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 6px 6px 5px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 6px 6px 5px 0px rgba(0, 0, 0, 0.25); */
+}
+.home-content {
+  padding-top: 1em;
+}
+.home-card h2 {
+  border-bottom: 1px solid hsla(104, 100%, 50%, 0.5);
+}
+
+.logo {
+  color: hsla(104, 100%, 50%, 0.5);
+  font-size: 4rem;
+}
+.tabs {
+  padding-top: 20%;
+}
