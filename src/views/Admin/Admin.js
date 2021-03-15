@@ -20,10 +20,6 @@ export default function Admin({ socket, room, setRoom }) {
       setMessages(res);
       console.log(messages);
     });
-    //
-    // socket.on("admin", (res) => {
-    //   setMessages(res);
-    // });
     socket.emit("clients");
     socket.on("clients", (clients) => {
       setClients(clients);
