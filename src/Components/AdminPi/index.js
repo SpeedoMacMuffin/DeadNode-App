@@ -1,4 +1,5 @@
 import "./styles.css";
+import FormWifi from "../FormWifi";
 
 export default function AdminPi({ clients }) {
   return (
@@ -10,8 +11,13 @@ export default function AdminPi({ clients }) {
         <span className="stack">CPU usage:</span>
         <span className="stack">RAM usage:</span>
         <span className="stack">Wireless: </span>
-        <button className="pseudo flex center setup">[Wireless Setup]</button>
+
+        <FormWifi name="wifi" message="Wireless Setup" />
         <button className="pseudo flex center setup">[Change Password]</button>
+        <div className="flex center">
+          <button className="pseudo center danger">[Reboot Pi]</button>
+          <button className="pseudo  center danger">[Shutdown Pi]</button>
+        </div>
       </div>
     </div>
   );
