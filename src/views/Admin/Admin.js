@@ -24,6 +24,10 @@ export default function Admin({ socket, room, setRoom }) {
     socket.on("clients", (clients) => {
       setClients(clients);
     });
+    socket.on("newFile", (fileName) => {
+      setFiles((files) => [...files, fileName]);
+      console.log(files);
+    });
   }, []);
   useEffect(async () => {
     try {
@@ -33,12 +37,12 @@ export default function Admin({ socket, room, setRoom }) {
       console.log(err);
     }
   }, []);
-  useEffect(() => {
-    socket.on("newFile", (fileName) => {
-      setFiles((files) => [...files, fileName]);
-      console.log(files);
-    });
-  }, []);
+  // useEffect(() => {
+  //   socket.on("newFile", (fileName) => {
+  //     setFiles((files) => [...files, fileName]);
+  //     console.log(files);
+  //   });
+  // }, []);
 
   return (
     <div className="admin-view">
