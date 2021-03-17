@@ -17,31 +17,21 @@ export default function Home({ socket, room, setRoom, username }) {
       <div className="tabs four">
         <input id="tab-1" type="radio" name="list" />
         <label className="pseudo button setup toggle" htmlFor="tab-1">
-          [Admin]
+          [Chat]
         </label>
         <input id="tab-2" type="radio" name="list" />
         <label className="pseudo button setup toggle" htmlFor="tab-2">
-          [Chat]
+          [Files]
         </label>
         <input id="tab-3" type="radio" name="list" />
         <label className="pseudo button setup toggle" htmlFor="tab-3">
-          [Files]
+          [Admin]
         </label>
         <input id="tab-4" type="radio" name="list" />
         <label className="pseudo button setup toggle" htmlFor="tab-4">
           [About]
         </label>
         <div className="row">
-          <div className="flex home-card">
-            <h2 className="flex center one">[Admin]</h2>
-            <div className="home-content">
-              The Admin-Panel is password protected but not user-related. Every
-              user with the password can enter the panel. <br></br> The Admin
-              Panel gives real-time information about the Chat, Files and global
-              System. Delete files and messages, change wireless-setup and
-              reboot/shutdown the Pi
-            </div>
-          </div>
           <div className="flex home-card">
             <h2 className="flex center one">[Chat]</h2>
 
@@ -59,7 +49,16 @@ export default function Home({ socket, room, setRoom, username }) {
               This will be expanded in further releases.
             </div>
           </div>
-
+          <div className="flex home-card">
+            <h2 className="flex center one">[Admin]</h2>
+            <div className="home-content">
+              The Admin-Panel is password protected but not user-related. Every
+              user with the password can enter the panel. <br></br> The Admin
+              Panel gives real-time information about the Chat, Files and global
+              System. Delete files and messages, change wireless-setup and
+              reboot/shutdown the Pi
+            </div>
+          </div>
           <div className=" flex home-card">
             <h2 className="flex center one">[About DeadNode]</h2>
 
