@@ -5,7 +5,7 @@ import AdminChat from "../../Components/AdminChat";
 import AdminFiles from "../../Components/AdminFiles";
 import AdminPi from "../../Components/AdminPi";
 
-export default function Admin({ socket, room, setRoom }) {
+export default function Admin({ socket, room, setRoom, admin, setAdmin }) {
   const [files, setFiles] = useState([]);
   const [messages, setMessages] = useState([]);
   const [clients, setClients] = useState("");
@@ -53,7 +53,7 @@ export default function Admin({ socket, room, setRoom }) {
       />
       <AdminFiles files={files} setFiles={setFiles} socket={socket} />
 
-      <AdminPi clients={clients} />
+      <AdminPi clients={clients} admin={admin} setAdmin={setAdmin} />
     </div>
   );
 }

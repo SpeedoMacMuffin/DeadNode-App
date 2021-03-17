@@ -2,7 +2,7 @@ import "./styles.css";
 import { useState, useEffect } from "react";
 import adminApi from "../../Api/adminAPI";
 
-export default function FormChangePW({ name, message }) {
+export default function FormRequirePW({ name, message }) {
   const [currentPW, setCurrentPW] = useState("");
   const [newPW, setNewPW] = useState("");
   const [newPW2, setNewPW2] = useState("");

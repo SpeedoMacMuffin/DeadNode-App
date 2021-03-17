@@ -55,7 +55,13 @@ function App() {
             </Route>
             <Route path="/admin">
               {admin === true ? (
-                <Admin socket={socket} room={room} setRoom={setRoom} />
+                <Admin
+                  socket={socket}
+                  room={room}
+                  setRoom={setRoom}
+                  admin={admin}
+                  setAdmin={setAdmin}
+                />
               ) : (
                 <FormPassword admin={admin} setAdmin={setAdmin} />
               )}
