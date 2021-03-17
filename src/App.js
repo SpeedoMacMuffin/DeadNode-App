@@ -7,8 +7,10 @@ import Admin from "./views/Admin/Admin";
 import Home from "./views/Home/Home";
 import NavBar from "./Components/NavBar/NavBar";
 import FormUsername from "./Components/FormUsername";
+import FormPassword from "./Components/FormPassword";
+import adminAPI from "./Api/adminAPI";
 import socketClient from "socket.io-client";
-import { chatServerUrl } from "../src/Api/ServerUrls";
+import { chatServerUrl, fileServerUrl } from "../src/Api/ServerUrls";
 const SERVER = chatServerUrl;
 
 const socket = socketClient(SERVER);
@@ -17,6 +19,14 @@ function App() {
   const [room, setRoom] = useState("home");
   const [username, setUsername] = useState("");
   const [content, setContent] = useState("");
+  const [admin, setAdmin] = useState(false);
+
+  useEffect(async () => {
+    const res = await adminAPI.get("/auth");
+    if (!res.data.auth) {
+      setAdmin(true);
+    }
+  }, []);
 
   return (
     <div className="App">
@@ -44,7 +54,11 @@ function App() {
               <Files socket={socket} room={room} setRoom={setRoom} />
             </Route>
             <Route path="/admin">
-              <Admin socket={socket} room={room} setRoom={setRoom} />
+              {admin === true ? (
+                <Admin socket={socket} room={room} setRoom={setRoom} />
+              ) : (
+                <FormPassword admin={admin} setAdmin={setAdmin} />
+              )}
             </Route>
             <Route path="/">
               <Home
