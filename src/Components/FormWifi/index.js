@@ -24,6 +24,11 @@ export default function FormWifi({
     if (!privateWifi) {
       console.log("open wifi!");
       const res = await adminApi.put("/wifiop", { ssid: ssid, private: false });
+      res.data.changed
+        ? setSuccess(res.data.message)
+        : setFailed("Error: " + res.data.message);
+      setTimeout(() => setFailed(""), 3000);
+      setTimeout(() => setSuccess(""), 3000);
     } else {
       if (
         ssid.replace(/\s/g, "") == "" ||
@@ -52,11 +57,11 @@ export default function FormWifi({
           const res = await adminApi.put("/wifipriv", changeReq);
           console.log(res.data);
 
-          // res.data.changed
-          //   ? setSuccess(res.data.message)
-          //   : setFailed("Error: " + res.data.message);
-          // setTimeout(() => setFailed(""), 3000);
-          // setTimeout(() => setSuccess(""), 3000);
+          res.data.changed
+            ? setSuccess(res.data.message)
+            : setFailed("Error: " + res.data.message);
+          setTimeout(() => setFailed(""), 3000);
+          setTimeout(() => setSuccess(""), 3000);
         }
       }
     }
