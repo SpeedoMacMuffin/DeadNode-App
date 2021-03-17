@@ -1,6 +1,15 @@
 import "./styles.css";
+import { useState, useEffect } from "react";
+import adminApi from "../../Api/adminAPI";
 
 export default function FormWifi({ name, onClick, message }) {
+  const [failed, setFailed] = useState("");
+  const [success, setSuccess] = useState("");
+  const [ssid, setSsid] = useState("");
+  const [key, setKey] = useState("ajfijapsdfjijasdfjöasjdkföjas");
+  const [hide, setHide] = useState(false);
+
+  const submit = () => {};
   return (
     <div>
       <label htmlFor={name} className="button flex center setup pseudo">
@@ -12,12 +21,43 @@ export default function FormWifi({ name, onClick, message }) {
         <label htmlFor={name} className="overlay"></label>
         <article id="form-wifi">
           <header>
-            <h3>WARNING!</h3>
+            <h3>[WIRELESS SETTINGS]</h3>
             <label htmlFor={name} className="close">
               &times;
             </label>
           </header>
-          <form></form>
+          <section className="content">
+            <form className="flex center two" onSubmit={submit}>
+              <label className="stack">
+                <input
+                  onChange={(e) => setSsid(e.target.value)}
+                  className="message-input"
+                  type="text"
+                  placeholder="Name(SSID)"
+                  value={ssid}
+                />
+              </label>
+              <label className="stack">
+                <input
+                  onChange={(e) => setKey(e.target.value)}
+                  className="message-input"
+                  type="password"
+                  placeholder="Password"
+                  value={key}
+                />
+              </label>
+              {failed !== "" ? (
+                <span className="message" style={{ color: "red" }}>
+                  {failed}
+                </span>
+              ) : null}
+              {success !== "" ? (
+                <span className="message" style={{ color: "chartreuse" }}>
+                  {success}
+                </span>
+              ) : null}
+            </form>
+          </section>
           <footer>
             <label
               htmlFor={name}
