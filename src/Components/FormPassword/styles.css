@@ -1,0 +1,13 @@
+.password-form {
+  /* position: relative;
+  top: 50%; */
+  font-size: 1.2em;
+}
+
+.password-view {
+  padding-top: 25%;
+  height: 90vh;
+}
+.logo.admin {
+  font-size: 4em;
+}
