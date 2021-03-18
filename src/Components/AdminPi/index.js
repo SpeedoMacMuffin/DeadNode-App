@@ -14,6 +14,10 @@ export default function AdminPi({ clients, admin, setAdmin }) {
 
   useEffect(async () => {
     const res = await adminApi.get("/wifi");
+    console.log(res.data)
+    setSsid(res.data.ssid)
+    setPassKey(res.data.pw)
+    setPrivateWifi(res.data.required)
   }, []);
 
   const shutdown = async () => {
@@ -38,8 +42,6 @@ export default function AdminPi({ clients, admin, setAdmin }) {
         <span className="stack">Connected Clients: {clients}</span>
         <span className="stack">CPU usage:</span>
         <span className="stack">RAM usage:</span>
-        <span className="stack">Wireless: </span>
-
         <FormWifi
           name="wifi"
           message="Wireless Settings"
