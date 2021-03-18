@@ -16,43 +16,75 @@ export default function FormWifi({
 }) {
   const [failed, setFailed] = useState("");
   const [success, setSuccess] = useState("");
-
   const [key2, setKey2] = useState("");
   const [key2Rep, setKey2Rep] = useState("");
+  const [changePW, setChangePW] = useState(false)
+
+  const makePasswordHidden = () => {
+    document.getElementById("password").setAttribute("type", "password");
+}
+const makePassword2Hidden = () => {
+  document.getElementById("password2").setAttribute("type", "password");
+}
 
   const submit = async (e) => {
+    if(passKey.length < 8 || passKey.length > 63){
+      e.preventDefault()
+      setTimeout(() => setFailed(""), 3000)
+      return setFailed("Error: Password has to be between 8 and 63 characters!");
+    }
     if (!privateWifi) {
+      e.preventDefault()
       console.log("open wifi!");
-      const res = await adminApi.put("/wifiop", { ssid: ssid, private: false });
+      
+      const res = await adminApi.put("/wifiop", { ssid: ssid, privateWifi: privateWifi });
+      console.log(res)
+      
       res.data.changed
         ? setSuccess(res.data.message)
         : setFailed("Error: " + res.data.message);
       setTimeout(() => setFailed(""), 3000);
       setTimeout(() => setSuccess(""), 3000);
     } else {
-      if (
-        ssid.replace(/\s/g, "") == "" ||
-        passKey.replace(/\s/g, "") == "" ||
-        key2.replace(/\s/g, "") == "" ||
-        key2Rep.replace(/\s/g, "") == ""
-      ) {
+      if(changePW && (key2.replace(/\s/g, "") == "" ||
+      key2Rep.replace(/\s/g, "") == "")){
         e.preventDefault();
         setFailed("Error: No empty fields!");
         setTimeout(() => setFailed(""), 3000);
       } else {
-        if (key2 !== key2Rep) {
+      if (
+        ssid.replace(/\s/g, "") == "" ||
+        passKey.replace(/\s/g, "") == ""
+        ) {
+        e.preventDefault();
+        setFailed("Error: No empty fields!");
+        setTimeout(() => setFailed(""), 3000);
+      } else {
+        if (changePW && key2 !== key2Rep) {
           e.preventDefault();
           setKey2("");
           setKey2Rep("");
           setFailed("Error: New Passwords don't match!");
           setTimeout(() => setFailed(""), 3000);
-        } else {
+        } else 
+        {
+          if(changePW){
+            if(key2.length < 8 || key2.length > 64){
+              e.preventDefault();
+              setKey2("");
+              setKey2Rep("")
+              setTimeout(() => setFailed(""), 3000)
+             return setFailed("Error: Only Passwords between 8 and 64 Characters!")
+              
+            }
+          }
           e.preventDefault();
 
           const changeReq = {
             ssid: ssid,
-            password: passKey,
-            newPassword: key2,
+            passKey: passKey,
+            newPassKey: key2,
+            privateWifi: privateWifi
           };
           const res = await adminApi.put("/wifipriv", changeReq);
           console.log(res.data);
@@ -64,7 +96,7 @@ export default function FormWifi({
           setTimeout(() => setSuccess(""), 3000);
         }
       }
-    }
+    }}
   };
   return (
     <div>
@@ -108,51 +140,71 @@ export default function FormWifi({
                       value={passKey}
                     />
                   </label>
-                  <label className="stack">
+                 
+                 {changePW ?  <div><label className="stack">
                     <input
                       onChange={(e) => setKey2(e.target.value)}
                       className="message-input"
-                      type="password"
+                      type="test"
+                      id="password"
                       placeholder="New Password"
                       value={key2}
+                      onFocus={() => makePasswordHidden()}
                     />
                   </label>
                   <label className="stack">
                     <input
                       onChange={(e) => setKey2Rep(e.target.value)}
                       className="message-input"
-                      type="password"
+                      type="text"
+                      id="password2"
                       placeholder="Repeat New Password"
                       value={key2Rep}
+                      onFocus={() => makePassword2Hidden()}
                     />
-                  </label>
+                  </label> </div> : null}
                 </div>
               ) : null}
               {failed !== "" ? (
-                <span className="message" style={{ color: "red" }}>
+                <span className="flex center one" style={{ color: "red" }}>
                   {failed}
                 </span>
               ) : null}
               {success !== "" ? (
-                <span className="message" style={{ color: "chartreuse" }}>
+                <span className="flex center one" style={{ color: "chartreuse" }}>
                   {success}
                 </span>
               ) : null}
             </form>
             <div className="one">
+              {changePW ? (
+                <button
+                  onClick={() => setChangePW(false)}
+                  className="pseudo setup danger"
+                >
+                  [Keep Password]
+                </button>
+              ) : (
+                <button
+                  onClick={() => setChangePW(true)}
+                  className="pseudo setup"
+                >
+                  [Change Password]
+                </button>
+              )}
               {privateWifi ? (
                 <button
                   onClick={() => setPrivateWifi(false)}
                   className="pseudo setup error"
                 >
-                  [Set Open]
+                  [Set Open Network]
                 </button>
               ) : (
                 <button
                   onClick={() => setPrivateWifi(true)}
                   className="pseudo setup"
                 >
-                  [Set Private]
+                  [Set Private Network]
                 </button>
               )}
             </div>

@@ -92,12 +92,12 @@ export default function FormChangePW({ name, message }) {
                 />
               </label>
               {failed !== "" ? (
-                <span className="message" style={{ color: "red" }}>
+                <span className="flex center one" style={{ color: "red" }}>
                   {failed}
                 </span>
               ) : null}
               {success !== "" ? (
-                <span className="message" style={{ color: "chartreuse" }}>
+                <span className="flex center one" style={{ color: "chartreuse" }}>
                   {success}
                 </span>
               ) : null}
