@@ -11,6 +11,7 @@ export default function AdminPi({ clients, admin, setAdmin }) {
   const [ssid, setSsid] = useState("");
   const [passKey, setPassKey] = useState("");
   const [privateWifi, setPrivateWifi] = useState(true);
+  const [systemStats, setSystemStats] = useState({})
 
   useEffect(async () => {
     const res = await adminApi.get("/wifi");
@@ -19,6 +20,12 @@ export default function AdminPi({ clients, admin, setAdmin }) {
     setPassKey(res.data.pw)
     setPrivateWifi(res.data.required)
   }, []);
+  useEffect(async () => {
+    const res = await adminApi.get("/system")
+    console.log(res.data)
+    setSystemStats({cpuTemp: res.data.cpuTemp, memTotal: res.data.memorytotal, memUsed: res.data.memoryused.replace("-", "")})
+    console.log(systemStats)
+  }, [])
 
   const shutdown = async () => {
     const res = await adminApi.get("/shutdown");
@@ -40,8 +47,9 @@ export default function AdminPi({ clients, admin, setAdmin }) {
         <h2 className="center one flex">[System]</h2>
 
         <span className="stack">Connected Clients: {clients}</span>
-        <span className="stack">CPU usage:</span>
-        <span className="stack">RAM usage:</span>
+        <span className="stack">CPU Temp.: {systemStats.cpuTemp}</span>
+        <span className="stack">RAM Total: {systemStats.memTotal}</span>
+        <span className="stack">RAM Usage: {systemStats.memUsed}</span>
         <FormWifi
           name="wifi"
           message="Wireless Settings"
