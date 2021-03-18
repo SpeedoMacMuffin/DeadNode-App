@@ -12,7 +12,7 @@ export default function Home({ socket, room, setRoom, username }) {
 
   return (
     <div className="home-view">
-      <h2>Hello {username}!</h2>
+      <h2>Welcome, {username}!</h2>
 
       <div className="tabs four">
         <input id="tab-1" type="radio" name="list" />
