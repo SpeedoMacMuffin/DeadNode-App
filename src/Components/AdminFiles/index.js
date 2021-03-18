@@ -1,12 +1,23 @@
 import "./styles.css";
 import Api from "../../Api/fileAPI";
-import { useState } from "react";
+import adminApi from "../../Api/adminAPI"
+import { useEffect, useState } from "react";
 import FormSure from "../FormSure";
 
 export default function AdminFiles({ files, setFiles, socket }) {
   const [message, setMessage] = useState("Delete All Files");
   const [usedSpace, setUsedSpace] = useState("");
   const [availableSpace, setAvailableSpace] = useState("");
+  
+  useEffect(async() => {
+    const res = await adminApi.get("/space")
+    console.log(res.data.data)
+    const newData = res.data.data.split(" ")
+    console.log(newData)
+    setAvailableSpace(newData[4])
+    setUsedSpace(newData[6].replace("\n", ""))
+    console.log("available: " + availableSpace, "used: " + usedSpace)
+  }, [])
 
   const deleteAll = async () => {
     if (files.length === 0) {
@@ -33,8 +44,8 @@ export default function AdminFiles({ files, setFiles, socket }) {
         <h2 className="center flex">[File System]</h2>
 
         <span className="stack">Files uploaded: {files.length}</span>
-        <span className="stack">Used Space:</span>
-        <span className="stack">Available Space:</span>
+        <span className="stack">Used Space: {usedSpace}</span>
+        <span className="stack">Available Space: {availableSpace}</span>
         <FormSure name="files" message={message} onClick={deleteAll} />
       </div>
     </div>
