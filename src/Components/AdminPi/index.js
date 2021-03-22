@@ -6,36 +6,43 @@ import FormSurePi from "../FormSurePi";
 import FormRequirePW from "../FormRequirePW";
 import adminApi from "../../Api/adminAPI";
 
-export default function AdminPi({ clients, admin, setAdmin }) {
+export default function AdminPi({ clients }) {
   const [output, setOutput] = useState("");
   const [ssid, setSsid] = useState("");
   const [passKey, setPassKey] = useState("");
   const [privateWifi, setPrivateWifi] = useState(true);
-  const [systemStats, setSystemStats] = useState({})
+  const [systemStats, setSystemStats] = useState({});
 
-  useEffect(async () => {
-    const res = await adminApi.get("/wifi");
-    console.log(res.data)
-    setSsid(res.data.ssid)
-    setPassKey(res.data.pw)
-    setPrivateWifi(res.data.required)
+  useEffect(() => {
+    const getWifi = async () => {
+      const res = await adminApi.get("/wifi");
+      console.log(res.data);
+      setSsid(res.data.ssid);
+      setPassKey(res.data.pw);
+      setPrivateWifi(res.data.required);
+    };
   }, []);
-  useEffect(async () => {
-    const res = await adminApi.get("/system")
-    console.log(res.data)
-    setSystemStats({cpuTemp: res.data.cpuTemp, memTotal: res.data.memorytotal, memUsed: res.data.memoryused.replace("-", "")})
-    console.log(systemStats)
-  }, [])
+  useEffect(() => {
+    const getSys = async () => {
+      const res = await adminApi.get("/pi/system");
+      console.log(res.data);
+      setSystemStats({
+        cpuTemp: res.data.cpuTemp,
+        memTotal: res.data.memorytotal,
+        memUsed: res.data.memoryused.replace("-", ""),
+      });
+    };
+  }, []);
 
   const shutdown = async () => {
-    const res = await adminApi.get("/shutdown");
+    const res = await adminApi.get("/pi/shutdown");
     console.log(res.data.output.toString());
     setOutput(res.data.output.toString());
     setTimeout(() => setOutput(""), 3000);
   };
 
   const reboot = async () => {
-    const res = await adminApi.get("/reboot");
+    const res = await adminApi.get("/pi/reboot");
     console.log(res.data.output.toString());
     setOutput(res.data.output.toString());
     setTimeout(() => setOutput(""), 3000);

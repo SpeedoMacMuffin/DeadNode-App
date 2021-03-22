@@ -18,7 +18,6 @@ export default function Admin({ socket, room, setRoom, admin, setAdmin }) {
     }
     socket.on("chatadmin", (res) => {
       setMessages(res);
-      console.log(messages);
     });
     socket.emit("clients");
     socket.on("clients", (clients) => {
@@ -26,23 +25,19 @@ export default function Admin({ socket, room, setRoom, admin, setAdmin }) {
     });
     socket.on("newFile", (fileName) => {
       setFiles((files) => [...files, fileName]);
-      console.log(files);
     });
   }, []);
-  useEffect(async () => {
-    try {
-      const res = await Api.get("/local");
-      setFiles(res.data.data);
-    } catch (err) {
-      console.log(err);
-    }
+  useEffect(() => {
+    const getFiles = async () => {
+      try {
+        const res = await Api.get("/local");
+        setFiles(res.data.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getFiles();
   }, []);
-  // useEffect(() => {
-  //   socket.on("newFile", (fileName) => {
-  //     setFiles((files) => [...files, fileName]);
-  //     console.log(files);
-  //   });
-  // }, []);
 
   return (
     <div className="admin-view">
