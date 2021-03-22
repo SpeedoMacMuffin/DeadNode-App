@@ -1,6 +1,5 @@
 import "./styles.css";
 import FormSure from "../FormSure";
-import Api from "../../Api/fileAPI";
 import { useState } from "react";
 
 export default function AdminChat({ socket, messages, setMessages }) {

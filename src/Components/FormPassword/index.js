@@ -7,7 +7,7 @@ export default function FormPassword({ setAdmin }) {
   const [fail, setFail] = useState(false);
 
   const submit = async (e) => {
-    if (pass.replace(/\s/g, "") == "") {
+    if (pass.replace(/\s/g, "") === "") {
       e.preventDefault();
       setPass("");
     } else {

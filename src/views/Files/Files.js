@@ -6,7 +6,6 @@ import LocalStorage from "../../Components/LocalStorage";
 export default function Files({ socket, room, setRoom }) {
   const [allFiles, setAllFiles] = useState([]);
   const [newFiles, setNewFiles] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getFiles = async () => {
@@ -23,7 +22,6 @@ export default function Files({ socket, room, setRoom }) {
           };
           setNewFiles((newFiles) => [...newFiles, file]);
         });
-        setLoading(false);
       } catch (err) {
         console.log(err);
       }

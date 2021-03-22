@@ -10,22 +10,24 @@ import FormUsername from "./Components/FormUsername";
 import FormPassword from "./Components/FormPassword";
 import adminAPI from "./Api/adminAPI";
 import socketClient from "socket.io-client";
-import { chatServerUrl, fileServerUrl } from "../src/Api/ServerUrls";
+import { chatServerUrl } from "../src/Api/ServerUrls";
 const SERVER = chatServerUrl;
 
 const socket = socketClient(SERVER);
 function App() {
-  const [inRoom, setInRoom] = useState(false);
   const [room, setRoom] = useState("home");
   const [username, setUsername] = useState("");
   const [content, setContent] = useState("");
   const [admin, setAdmin] = useState(false);
 
-  useEffect(async () => {
-    const res = await adminAPI.get("/auth");
-    if (!res.data.auth) {
-      setAdmin(true);
-    }
+  useEffect(() => {
+    const getAuth = async () => {
+      const res = await adminAPI.get("/auth");
+      if (!res.data.auth) {
+        setAdmin(true);
+      }
+    };
+    getAuth();
   }, []);
 
   return (
@@ -39,7 +41,7 @@ function App() {
         />
       ) : (
         <Router>
-          <NavBar in={inRoom} />
+          <NavBar />
 
           <Switch>
             <Route path="/chat">

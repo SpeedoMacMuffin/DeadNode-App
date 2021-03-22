@@ -1,8 +1,6 @@
 import "./styles.css";
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
-export default function NavBar({ is }) {
-  const [isIn, setIsIn] = useState({ is });
+export default function NavBar() {
   return (
     <nav>
       <NavLink to="/" className="brand">
@@ -14,26 +12,14 @@ export default function NavBar({ is }) {
         [Menu]
       </label>
       <div className="menu ">
-        <NavLink
-          className="button pseudo"
-          to="/chat"
-          onClick={() => setIsIn(true)}
-        >
+        <NavLink className="button pseudo" to="/chat">
           [Chat]
         </NavLink>
-        <NavLink
-          className="button pseudo"
-          to="/files"
-          onClick={() => setIsIn(false)}
-        >
+        <NavLink className="button pseudo" to="/files">
           [Files]
         </NavLink>
 
-        <NavLink
-          className="button pseudo"
-          to="/admin"
-          onClick={() => setIsIn(false)}
-        >
+        <NavLink className="button pseudo" to="/admin">
           [Admin]
         </NavLink>
       </div>

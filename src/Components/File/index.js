@@ -1,6 +1,4 @@
 import "./styles.css";
-import { useState, useEffect } from "react";
-import Api from "../../Api/fileAPI";
 import { fileServerUrl } from "../../Api/ServerUrls";
 
 export default function File({ name, path, size }) {
@@ -12,6 +10,7 @@ export default function File({ name, path, size }) {
       <a
         className="button pseudo file-button three-fifth"
         target="_blank"
+        rel="noreferrer"
         href={fileUrl}
       >
         {name}
@@ -23,6 +22,7 @@ export default function File({ name, path, size }) {
 
       <a
         target="_blank"
+        rel="noreferrer"
         href={downloadUrl}
         className="button pseudo flex center file-button fifth"
       >

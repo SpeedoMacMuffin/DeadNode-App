@@ -1,5 +1,5 @@
 import "./styles.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import adminApi from "../../Api/adminAPI";
 
 export default function FormChangePW({ name, message }) {
@@ -10,9 +10,9 @@ export default function FormChangePW({ name, message }) {
   const [success, setSuccess] = useState("");
   const submit = async (e) => {
     if (
-      currentPW.replace(/\s/g, "") == "" ||
-      newPW.replace(/\s/g, "") == "" ||
-      newPW2.replace(/\s/g, "") == ""
+      currentPW.replace(/\s/g, "") === "" ||
+      newPW.replace(/\s/g, "") === "" ||
+      newPW2.replace(/\s/g, "") === ""
     ) {
       e.preventDefault();
       setCurrentPW("");
@@ -97,7 +97,10 @@ export default function FormChangePW({ name, message }) {
                 </span>
               ) : null}
               {success !== "" ? (
-                <span className="flex center one" style={{ color: "chartreuse" }}>
+                <span
+                  className="flex center one"
+                  style={{ color: "chartreuse" }}
+                >
                   {success}
                 </span>
               ) : null}

@@ -1,17 +1,10 @@
 import "./styles.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Api from "../../Api/fileAPI";
 import FormUpload from "../FormUpload";
 import FileTable from "../FileTable";
 
-export default function LocalStorage({
-  storageName,
-  socket,
-  allFiles,
-  setAllFiles,
-  newFiles,
-}) {
-  const [uploadedFile, setUploadedFile] = useState({});
+export default function LocalStorage({ socket, allFiles, newFiles }) {
   const [message, setMessage] = useState();
   const [uploadPercentage, setUploadPercentage] = useState(0);
   const [file, setFile] = useState();
@@ -46,9 +39,7 @@ export default function LocalStorage({
       socket.emit("file-added");
       console.log(file);
       setTimeout(() => setUploadPercentage(0), 1000);
-      setUploadedFile({ fileName, filePath });
       setMessage(message);
-
       setFilename("");
     } catch (err) {
       console.log(err);

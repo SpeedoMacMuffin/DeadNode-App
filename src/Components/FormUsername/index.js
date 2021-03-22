@@ -8,7 +8,6 @@ export default function FormUsername({
   setUsername,
 }) {
   useEffect(() => {
-    console.log(localStorage.getItem("username"));
     const user = localStorage.getItem("username");
     if (user) {
       let decodedUser = atob(user);
@@ -19,7 +18,7 @@ export default function FormUsername({
     }
   }, []);
   const validatedContent = (name) => {
-    if (name.replace(/\s/g, "") == "") {
+    if (name.replace(/\s/g, "") === "") {
       alert("Please enter a username");
     } else {
       let buff = new Buffer.from(name);
