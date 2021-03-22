@@ -18,6 +18,7 @@ export default function AdminFiles({ files, setFiles, socket }) {
       setAvailableSpace(newData[4]);
       setUsedSpace(newData[6].replace("\n", ""));
     };
+    getSpace()
   }, []);
 
   const deleteAll = async () => {
