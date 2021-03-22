@@ -350,6 +350,7 @@ $ sudo systemctl reboot
 ```
 
 Now, finally, after rebooting you should be able to see the access point "DeadNode".
+Login, open your browser and go to "deadnode.io"
 
 The default credentials are:
 
