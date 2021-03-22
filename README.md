@@ -29,6 +29,8 @@ This is an Open-Source Project, feel free to contribute to this project!
 
 [AdminServer](https://github.com/SpeedoMacMuffin/AdminServer)
 
+_A static version of the application is hosted [here](https://deadnode-io.herokuapp.com). Some functionalities are disabled_
+
 ## 3. Tech-Stack
 
 ---
