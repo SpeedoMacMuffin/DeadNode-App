@@ -1,70 +1,357 @@
-# Getting Started with Create React App
+# DeadNode
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Content:
 
-## Available Scripts
+1. About
+2. Linked Repositories
+3. Tech-Stack
+4. <a name="installation">Installation</a>
 
-In the project directory, you can run:
+## 1. About
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+DeadNode is a Web-Application running fully on a Raspberry Pi (tested and run on Zero W, 3b+, 4b+) that creates a self-contained wireless Access-Point and lets you chat and share files anonymously.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+This project was inspired by the Open-Source Project [PirateBox](https://piratebox.cc/).
 
-### `npm test`
+This is an Open-Source Project, feel free to contribute to this project!
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 2. Linked Repositories
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[React-App](https://github.com/SpeedoMacMuffin/DeadNode-App)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+[Socket.io/ChatServer](https://github.com/SpeedoMacMuffin/ChatServer)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+[FileServer](https://github.com/SpeedoMacMuffin/FileServer)
 
-### `npm run eject`
+[AdminServer](https://github.com/SpeedoMacMuffin/AdminServer)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 3. Tech-Stack
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- React.js
+- Picnic CSS
+- Node.js
+- Express.js
+- MongoDB/Mongoose
+- Socket.io
+- Raspbian Lite
+- Raspberry Pi(Zero W, 3b+, 4b+)
+- PM2
+- NginX
+- Hostapd
+- Dnsmasq
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Usage:
 
-## Learn More
+- The Front-End is made with React.js and styled with Picnic CSS and is divided in Chat-, Files- and Admin-Section.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- The Socket.io/ChatServer uses Socket.io, Mongoose and manages the Chat in real-time and also updates in real-time when files get uploaded or deleted and sends basic information to the Admin-Section(e.g. connected clients, file- and message-count)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- The FileServer uses Node.js, Express, Express-Fileupload and handles the upload, download, opening and deleting of files
 
-### Code Splitting
+- The AdminServer uses Node.js, Express, bcrypt, Mongoose, Raspberry-Info and manages to provide an overview of the system itself(used & available Space, CPU- & RAM-Info) and gives the opportunity to change the admin- and wireless-credentials as well as rebooting and shutting down the Raspberry Pi.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- PM2, NginX, Hostapd, Dnsmasq, RaspbianLite and Raspberry Pi are needed to create a self-contained wireless access point
 
-### Analyzing the Bundle Size
+## 4. [Installation](#installation)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+### **_1. Download and copy RaspbianLite on SD-Card and set up the Raspberry Pi_**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Click on [this](https://www.raspberrypi.org/software/operating-systems/) link and select "Raspberry Pi OS Lite" and download the file.
 
-### Advanced Configuration
+- Put the MicroSD-Card into your PC or Laptop
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Flash the OS image to the card. If you don't have it already, [balenaEtcher](https://www.balena.io/etcher/) is an awesome tool for this and easy to use. Select the image or zip-file, select the SD-Card, Flash!
 
-### Deployment
+- While flashing, open the simplest text-editor you have and create an empty file called "ssh", without quotes and without any extension, e.g. ".txt".
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- (Only for Zero W or if you don't have an ethernet-connection) With the same editor, create a new file called "wpa_supplicant.conf" with the following content and save the file:
+  Note: replace the ssid- and psk-values with the values of your network.
 
-### `npm run build` fails to minify
+```
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+network={
+    ssid="Your_SSID"
+    scan_ssid=1
+    psk="Your_Password"
+    key_mgmt=WPA-PSK
+}
+```
+
+- After flashing, remove the SD-Card and put it back in. Move to the directory of your SD-Card and copy the ssh-file(and wpa_supplicant.conf if needed) into the directory. This enables ssh on your Pi, so you can download the Repositories and Packages. Now you can unmount the card and put it in the Pi.
+
+- Plug in the Ethernet-Cable and turn on the Pi.
+
+- In your Router configuration you should see the Raspberry Pi. Note down the IP-Address of your Pi
+
+- Now open a Terminal(or PuTTy) and type
+
+```
+ssh pi@yourpi'sIPaddress        //e.g. ssh pi@192.168.178.59
+```
+
+- The default Password for the Raspberry Pi is "raspberry"
+
+- To change the default Password (highly recommended!) type the command "passwd". It should look like this:
+
+```
+pi@raspberrypi:~ $ passwd
+Changing password for pi.
+Current password:
+New password:
+Retype new password:
+passwd: password updated successfully
+```
+
+- Last step to set up the Pi is updating the operating system. Type:
+
+```
+$ sudo apt-get update
+```
+
+and then
+
+```
+$ sudo apt-get upgrade
+```
+
+This will take a little while, and after that, the Pi will be ready to use.
+
+### **_2. Install Git, MongoDB, nvm_**
+
+Run the following commands from the command-line. You can simply copy & paste and press Enter
+
+- Install Git to be able to download the Repositories:
+
+```
+$ sudo apt-get install git
+```
+
+- Install MongoDB
+
+```
+$ sudo apt-get install mongodb
+```
+
+```
+$ sudo systemctl enable mongodb
+```
+
+```
+$ sudo systemctl start mongodb
+```
+
+- Install nvm(Node.js and npm)
+
+```
+$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+```
+
+then
+
+```
+$ export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+```
+
+- type this to check if nvm is correctly installed. the output should be "nvm"
+
+```
+$ command -v nvm
+```
+
+- install latest stable version of Node.js on the Pi 3b+ and 4b+:
+
+```
+$ nvm install stable
+```
+
+- on the Pi Zero W:
+
+```
+$ nvm install v10
+```
+
+this installs Node.js v10. Higher versions of Node.js are not supported by the Zero W
+
+- install PM2
+
+```
+$ npm install pm2 -g
+```
+
+### **_3. Clone Repositories, install Packages & start with PM2_**
+
+```
+$ git clone https://github.com/SpeedoMacMuffin/ChatServer && cd ChatServer && npm i && pm2 start server.js --name Socket.io && cd
+```
+
+```
+$ git clone https://github.com/SpeedoMacMuffin/AdminServer && cd AdminServer && npm i && pm2 start server.js --name Admin && cd
+```
+
+```
+$ git clone https://github.com/SpeedoMacMuffin/FileServer && cd FileServer && npm i && pm2 start server.js --name Files && cd
+```
+
+```
+$ git clone https://github.com/SpeedoMacMuffin/DeadNode-App && cd DeadNode-App && npm i && npm run build && pm2 serve build 3000 --name DeadNode --spa && cd
+```
+
+### **_4. Run on startup_**
+
+- To start everything on boot, type
+
+```
+$ pm2 startup
+```
+
+The output should look like this:
+
+```
+pm2 startup
+$ [PM2] You have to run this command as root. Execute the following command:
+$ sudo su -c env PATH=$PATH:/home/unitech/.nvm/versions/node/v4.3/bin pm2 startup <distribution> -u <user> --hp <home-path>
+```
+
+- Run the displayed command and then
+
+```
+$ pm2 save
+```
+
+- Install and configure NginX
+
+```
+$ sudo apt install nginx
+```
+
+```
+$ sudo systemctl enable nginx
+```
+
+```
+$ sudo nano /etc/nginx/sites-available/default
+```
+
+edit the contents of the file to look like this:
+
+```
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+        root /var/www/html;
+        index index.html index.htm index.nginx-debian.html;
+        server_name deadnode.io;
+        location / {
+                proxy_pass http://192.168.4.1:3000;
+        }
+}
+```
+
+### **_5. Set up Access Point_**
+
+- Install Hostapd
+
+```
+$ sudo apt install hostapd
+```
+
+- Enable access point on boot
+
+```
+$ sudo systemctl unmask hostapd
+
+$ sudo systemctl enable hostapd
+```
+
+- Install Dnsmasq
+
+```
+$ sudo apt install dnsmasq
+```
+
+- Configure static IP
+
+```
+$ sudo nano /etc/dhcpcd.conf
+```
+
+go to the end of the file, add the text below and save
+
+```
+interface wlan0
+    static ip_address=192.168.4.1/24
+    nohook wpa_supplicant
+```
+
+- Rename default file and edit new one
+
+```
+$ sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
+$ sudo nano /etc/dnsmasq.conf
+```
+
+Copy the following text into the file and save
+
+```
+interface=wlan0 # Listening interface
+dhcp-range=192.168.4.2,192.168.4.20,255.255.255.0,24h
+                # Pool of IP addresses served via DHCP
+domain=wlan     # Local wireless DNS domain
+address=/deadnode.io/192.168.4.1
+                # Alias for this router
+```
+
+- unblock Wifi
+
+```
+$ sudo rfkill unblock wlan
+```
+
+- configure Hostapd
+
+```
+sudo nano /etc/hostapd/hostapd.conf
+```
+
+Copy the following text into the file and save
+
+```
+interface=wlan0
+ssid=DeadNode
+hw_mode=g
+channel=7
+macaddr_acl=0
+auth_algs=1
+ignore_broadcast_ssid=0
+wpa=2
+wpa_passphrase=ChangeMe
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP
+```
+
+- run the access point and restart
+
+```
+$ sudo systemctl reboot
+```
+
+Now, finally, after rebooting you should be able to see the access point "DeadNode".
+
+The default credentials are:
+
+- Wifi: ChangeMe
+- Admin-Section: ChangeMe
+
+Make sure to change the passwords!
