@@ -12,13 +12,11 @@ export default function AdminFiles({ files, setFiles, socket }) {
   useEffect(() => {
     const getSpace = async () => {
       const res = await adminApi.get("/pi/space");
-      console.log(res.data.data);
       const newData = res.data.data.split(" ");
-      console.log(newData);
       setAvailableSpace(newData[4]);
       setUsedSpace(newData[6].replace("\n", ""));
     };
-    getSpace()
+    getSpace();
   }, []);
 
   const deleteAll = async () => {

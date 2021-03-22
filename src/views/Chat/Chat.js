@@ -15,7 +15,6 @@ export default function Chat({ room, setRoom, username, socket }) {
     }
     socket.on("history", (msgArray) => {
       setMessages(msgArray);
-      console.log("messages received");
     });
 
     socket.on("receiveNewMessage", ({ content, username }) => {
@@ -24,7 +23,6 @@ export default function Chat({ room, setRoom, username, socket }) {
         username,
       };
       setMessages((messages) => [...messages, msg]);
-      console.log("received new message");
     });
   }, []);
 

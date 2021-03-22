@@ -35,7 +35,6 @@ export default function LocalStorage({ socket, allFiles, newFiles }) {
           );
         },
       });
-      const { fileName, filePath } = res.data;
       socket.emit("file-added");
       console.log(file);
       setTimeout(() => setUploadPercentage(0), 1000);

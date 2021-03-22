@@ -15,36 +15,32 @@ export default function AdminPi({ clients }) {
   useEffect(() => {
     const getWifi = async () => {
       const res = await adminApi.get("/wifi");
-      console.log(res.data);
       setSsid(res.data.ssid);
       setPassKey(res.data.pw);
       setPrivateWifi(res.data.required);
     };
-    getWifi()
+    getWifi();
   }, []);
   useEffect(() => {
     const getSys = async () => {
       const res = await adminApi.get("/pi/system");
-      console.log(res.data);
       setSystemStats({
         cpuTemp: res.data.cpuTemp,
         memTotal: res.data.memorytotal,
         memUsed: res.data.memoryused.replace("-", ""),
       });
     };
-    getSys()
+    getSys();
   }, []);
 
   const shutdown = async () => {
     const res = await adminApi.get("/pi/shutdown");
-    console.log(res.data.output.toString());
     setOutput(res.data.output.toString());
     setTimeout(() => setOutput(""), 3000);
   };
 
   const reboot = async () => {
     const res = await adminApi.get("/pi/reboot");
-    console.log(res.data.output.toString());
     setOutput(res.data.output.toString());
     setTimeout(() => setOutput(""), 3000);
   };
