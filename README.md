@@ -62,7 +62,7 @@ Usage:
 
 ---
 
-### **_1. Download and copy RaspbianLite on SD-Card and set up the Raspberry Pi_**
+### **_1. Raspberry Pi Setup_**
 
 - Click on [this](https://www.raspberrypi.org/software/operating-systems/) link and select "Raspberry Pi OS Lite" and download the file.
 
