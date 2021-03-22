@@ -62,6 +62,8 @@ Usage:
 
 ---
 
+In the future there will be an Image provided for an easy installation process. Until then, this takes around 15 - 20 minutes on the Pi 3b+ and 4b+. The Zero W takes a little longer.
+
 ### **_1. Raspberry Pi Setup_**
 
 - Click on [this](https://www.raspberrypi.org/software/operating-systems/) link and select "Raspberry Pi OS Lite" and download the file.
