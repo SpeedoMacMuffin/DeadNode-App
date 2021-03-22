@@ -20,15 +20,15 @@ function App() {
   const [content, setContent] = useState("");
   const [admin, setAdmin] = useState(false);
 
-  useEffect(() => {
-    const getAuth = async () => {
-      const res = await adminAPI.get("/auth");
-      if (!res.data.auth) {
-        setAdmin(true);
-      }
-    };
-    getAuth();
-  }, []);
+  // useEffect(() => {
+  //   const getAuth = async () => {
+  //     const res = await adminAPI.get("/auth");
+  //     if (!res.data.auth) {
+  //       setAdmin(true);
+  //     }
+  //   };
+  //   getAuth();
+  // }, []);
 
   return (
     <div className="App">

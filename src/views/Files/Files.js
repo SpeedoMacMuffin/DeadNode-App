@@ -7,27 +7,27 @@ export default function Files({ socket, room, setRoom }) {
   const [allFiles, setAllFiles] = useState([]);
   const [newFiles, setNewFiles] = useState([]);
 
-  useEffect(() => {
-    const getFiles = async () => {
-      const res = await Api.get("/local");
-      const files = res.data.data;
-      try {
-        files.forEach(async (file) => {
-          const res = await Api.get("/local/" + file);
+  // useEffect(() => {
+  //   const getFiles = async () => {
+  //     const res = await Api.get("/local");
+  //     const files = res.data.data;
+  //     try {
+  //       files.forEach(async (file) => {
+  //         const res = await Api.get("/local/" + file);
 
-          file = {
-            name: res.data.data.name,
-            path: res.data.data.url,
-            size: res.data.data.details.size,
-          };
-          setNewFiles((newFiles) => [...newFiles, file]);
-        });
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getFiles();
-  }, []);
+  //         file = {
+  //           name: res.data.data.name,
+  //           path: res.data.data.url,
+  //           size: res.data.data.details.size,
+  //         };
+  //         setNewFiles((newFiles) => [...newFiles, file]);
+  //       });
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   getFiles();
+  // }, []);
 
   useEffect(() => {
     if (room !== "files") {

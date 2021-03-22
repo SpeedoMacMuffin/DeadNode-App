@@ -8,43 +8,43 @@ export default function FormRequirePW({ name, message }) {
   const [newPW2, setNewPW2] = useState("");
   const [failed, setFailed] = useState("");
   const [success, setSuccess] = useState("");
-  const submit = async (e) => {
-    if (
-      currentPW.replace(/\s/g, "") === "" ||
-      newPW.replace(/\s/g, "") === "" ||
-      newPW2.replace(/\s/g, "") === ""
-    ) {
-      e.preventDefault();
-      setCurrentPW("");
-      setNewPW("");
-      setNewPW2("");
-      setFailed("Error: No empty fields!");
-      setTimeout(() => setFailed(""), 3000);
-    } else {
-      if (newPW !== newPW2) {
-        e.preventDefault();
-        setCurrentPW("");
-        setNewPW("");
-        setNewPW2("");
-        setFailed("Error: New passwords don't match!");
-        setTimeout(() => setFailed(""), 3000);
-      } else {
-        e.preventDefault();
-        const changeReq = { password: currentPW, newPassword: newPW };
+  // const submit = async (e) => {
+  //   if (
+  //     currentPW.replace(/\s/g, "") === "" ||
+  //     newPW.replace(/\s/g, "") === "" ||
+  //     newPW2.replace(/\s/g, "") === ""
+  //   ) {
+  //     e.preventDefault();
+  //     setCurrentPW("");
+  //     setNewPW("");
+  //     setNewPW2("");
+  //     setFailed("Error: No empty fields!");
+  //     setTimeout(() => setFailed(""), 3000);
+  //   } else {
+  //     if (newPW !== newPW2) {
+  //       e.preventDefault();
+  //       setCurrentPW("");
+  //       setNewPW("");
+  //       setNewPW2("");
+  //       setFailed("Error: New passwords don't match!");
+  //       setTimeout(() => setFailed(""), 3000);
+  //     } else {
+  //       e.preventDefault();
+  //       const changeReq = { password: currentPW, newPassword: newPW };
 
-        const res = await adminApi.put("/auth", changeReq);
-        console.log(res.data);
-        setCurrentPW("");
-        setNewPW("");
-        setNewPW2("");
-        res.data.changed
-          ? setSuccess(res.data.message)
-          : setFailed("Error: " + res.data.message);
-        setTimeout(() => setFailed(""), 3000);
-        setTimeout(() => setSuccess(""), 3000);
-      }
-    }
-  };
+  //       const res = await adminApi.put("/auth", changeReq);
+  //       console.log(res.data);
+  //       setCurrentPW("");
+  //       setNewPW("");
+  //       setNewPW2("");
+  //       res.data.changed
+  //         ? setSuccess(res.data.message)
+  //         : setFailed("Error: " + res.data.message);
+  //       setTimeout(() => setFailed(""), 3000);
+  //       setTimeout(() => setSuccess(""), 3000);
+  //     }
+  //   }
+  // };
 
   return (
     <div>
@@ -63,7 +63,7 @@ export default function FormRequirePW({ name, message }) {
             </label>
           </header>
           <section className="content">
-            <form className="flex center two" onSubmit={submit}>
+            <form className="flex center two">
               <label className="stack">
                 <input
                   onChange={(e) => setCurrentPW(e.target.value)}
@@ -112,7 +112,6 @@ export default function FormRequirePW({ name, message }) {
               id="submit"
               className="button center half pseudo setup"
               type="submit"
-              onClick={submit}
             >
               [Send]
             </label>

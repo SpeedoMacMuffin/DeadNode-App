@@ -20,7 +20,7 @@ export default function FormUpload({
     <div>
       <form
         className=""
-        onSubmit={onSubmit}
+
         // enctype="multipart/form-data"
         // method="POST"
       >

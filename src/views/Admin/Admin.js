@@ -10,34 +10,34 @@ export default function Admin({ socket, room, setRoom, admin, setAdmin }) {
   const [messages, setMessages] = useState([]);
   const [clients, setClients] = useState("");
 
-  useEffect(() => {
-    if (room !== "admin") {
-      socket.emit("leaving room", { room });
-      setRoom("admin");
-      socket.emit("room", { room: "admin" });
-    }
-    socket.on("chatadmin", (res) => {
-      setMessages(res);
-    });
-    socket.emit("clients");
-    socket.on("clients", (clients) => {
-      setClients(clients);
-    });
-    socket.on("newFile", (fileName) => {
-      setFiles((files) => [...files, fileName]);
-    });
-  }, []);
-  useEffect(() => {
-    const getFiles = async () => {
-      try {
-        const res = await Api.get("/local");
-        setFiles(res.data.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getFiles();
-  }, []);
+  // useEffect(() => {
+  //   if (room !== "admin") {
+  //     socket.emit("leaving room", { room });
+  //     setRoom("admin");
+  //     socket.emit("room", { room: "admin" });
+  //   }
+  //   socket.on("chatadmin", (res) => {
+  //     setMessages(res);
+  //   });
+  //   socket.emit("clients");
+  //   socket.on("clients", (clients) => {
+  //     setClients(clients);
+  //   });
+  //   socket.on("newFile", (fileName) => {
+  //     setFiles((files) => [...files, fileName]);
+  //   });
+  // }, []);
+  // useEffect(() => {
+  //   const getFiles = async () => {
+  //     try {
+  //       const res = await Api.get("/local");
+  //       setFiles(res.data.data);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   getFiles();
+  // }, []);
 
   return (
     <div className="admin-view">

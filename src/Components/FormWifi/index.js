@@ -26,84 +26,84 @@ export default function FormWifi({
     document.getElementById("password2").setAttribute("type", "password");
   };
 
-  const submit = async (e) => {
-    if (passKey.length < 8 || passKey.length > 63) {
-      e.preventDefault();
-      setTimeout(() => setFailed(""), 3000);
-      return setFailed(
-        "Error: Password has to be between 8 and 63 characters!"
-      );
-    }
-    if (!privateWifi) {
-      e.preventDefault();
-      console.log("open wifi!");
+  // const submit = async (e) => {
+  //   if (passKey.length < 8 || passKey.length > 63) {
+  //     e.preventDefault();
+  //     setTimeout(() => setFailed(""), 3000);
+  //     return setFailed(
+  //       "Error: Password has to be between 8 and 63 characters!"
+  //     );
+  //   }
+  //   if (!privateWifi) {
+  //     e.preventDefault();
+  //     console.log("open wifi!");
 
-      const res = await adminApi.put("/wifi/wifiop", {
-        ssid: ssid,
-        privateWifi: privateWifi,
-      });
+  //     const res = await adminApi.put("/wifi/wifiop", {
+  //       ssid: ssid,
+  //       privateWifi: privateWifi,
+  //     });
 
-      res.data.changed
-        ? setSuccess(res.data.message)
-        : setFailed("Error: " + res.data.message);
-      setTimeout(() => setFailed(""), 3000);
-      setTimeout(() => setSuccess(""), 3000);
-    } else {
-      if (
-        changePW &&
-        (key2.replace(/\s/g, "") === "" || key2Rep.replace(/\s/g, "") === "")
-      ) {
-        e.preventDefault();
-        setFailed("Error: No empty fields!");
-        setTimeout(() => setFailed(""), 3000);
-      } else {
-        if (
-          ssid.replace(/\s/g, "") === "" ||
-          passKey.replace(/\s/g, "") === ""
-        ) {
-          e.preventDefault();
-          setFailed("Error: No empty fields!");
-          setTimeout(() => setFailed(""), 3000);
-        } else {
-          if (changePW && key2 !== key2Rep) {
-            e.preventDefault();
-            setKey2("");
-            setKey2Rep("");
-            setFailed("Error: New Passwords don't match!");
-            setTimeout(() => setFailed(""), 3000);
-          } else {
-            if (changePW) {
-              if (key2.length < 8 || key2.length > 64) {
-                e.preventDefault();
-                setKey2("");
-                setKey2Rep("");
-                setTimeout(() => setFailed(""), 3000);
-                return setFailed(
-                  "Error: Only Passwords between 8 and 64 Characters!"
-                );
-              }
-            }
-            e.preventDefault();
+  //     res.data.changed
+  //       ? setSuccess(res.data.message)
+  //       : setFailed("Error: " + res.data.message);
+  //     setTimeout(() => setFailed(""), 3000);
+  //     setTimeout(() => setSuccess(""), 3000);
+  //   } else {
+  //     if (
+  //       changePW &&
+  //       (key2.replace(/\s/g, "") === "" || key2Rep.replace(/\s/g, "") === "")
+  //     ) {
+  //       e.preventDefault();
+  //       setFailed("Error: No empty fields!");
+  //       setTimeout(() => setFailed(""), 3000);
+  //     } else {
+  //       if (
+  //         ssid.replace(/\s/g, "") === "" ||
+  //         passKey.replace(/\s/g, "") === ""
+  //       ) {
+  //         e.preventDefault();
+  //         setFailed("Error: No empty fields!");
+  //         setTimeout(() => setFailed(""), 3000);
+  //       } else {
+  //         if (changePW && key2 !== key2Rep) {
+  //           e.preventDefault();
+  //           setKey2("");
+  //           setKey2Rep("");
+  //           setFailed("Error: New Passwords don't match!");
+  //           setTimeout(() => setFailed(""), 3000);
+  //         } else {
+  //           if (changePW) {
+  //             if (key2.length < 8 || key2.length > 64) {
+  //               e.preventDefault();
+  //               setKey2("");
+  //               setKey2Rep("");
+  //               setTimeout(() => setFailed(""), 3000);
+  //               return setFailed(
+  //                 "Error: Only Passwords between 8 and 64 Characters!"
+  //               );
+  //             }
+  //           }
+  //           e.preventDefault();
 
-            const changeReq = {
-              ssid: ssid,
-              passKey: passKey,
-              newPassKey: key2,
-              privateWifi: privateWifi,
-            };
-            const res = await adminApi.put("/wifi/wifipriv", changeReq);
-            console.log(res.data);
+  //           const changeReq = {
+  //             ssid: ssid,
+  //             passKey: passKey,
+  //             newPassKey: key2,
+  //             privateWifi: privateWifi,
+  //           };
+  //           const res = await adminApi.put("/wifi/wifipriv", changeReq);
+  //           console.log(res.data);
 
-            res.data.changed
-              ? setSuccess(res.data.message)
-              : setFailed("Error: " + res.data.message);
-            setTimeout(() => setFailed(""), 3000);
-            setTimeout(() => setSuccess(""), 3000);
-          }
-        }
-      }
-    }
-  };
+  //           res.data.changed
+  //             ? setSuccess(res.data.message)
+  //             : setFailed("Error: " + res.data.message);
+  //           setTimeout(() => setFailed(""), 3000);
+  //           setTimeout(() => setSuccess(""), 3000);
+  //         }
+  //       }
+  //     }
+  //   }
+  // };
   return (
     <div>
       <label htmlFor={name} className="button flex center setup pseudo">
@@ -223,11 +223,7 @@ export default function FormWifi({
             </div>
           </section>
           <footer>
-            <label
-              htmlFor={name}
-              className="button center half pseudo setup"
-              onClick={submit}
-            >
+            <label htmlFor={name} className="button center half pseudo setup">
               [Send]
             </label>
             <label htmlFor={name} className="button center danger pseudo half">

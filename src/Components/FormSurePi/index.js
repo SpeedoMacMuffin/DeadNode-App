@@ -1,6 +1,6 @@
 import "./styles.css";
 
-export default function FormSurePi({ name, onClick, message, content }) {
+export default function FormSurePi({ name, message, content }) {
   return (
     <div>
       <label htmlFor={name} className="button flex center danger pseudo">
@@ -19,11 +19,7 @@ export default function FormSurePi({ name, onClick, message, content }) {
           </header>
           <section className="content">{content}</section>
           <footer>
-            <label
-              htmlFor={name}
-              className="button center half pseudo setup"
-              onClick={onClick}
-            >
+            <label htmlFor={name} className="button center half pseudo setup">
               [{message}]
             </label>
             <label htmlFor={name} className="button center danger pseudo half">

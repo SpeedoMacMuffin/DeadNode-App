@@ -9,15 +9,15 @@ export default function AdminFiles({ files, setFiles, socket }) {
   const [usedSpace, setUsedSpace] = useState("");
   const [availableSpace, setAvailableSpace] = useState("");
 
-  useEffect(() => {
-    const getSpace = async () => {
-      const res = await adminApi.get("/pi/space");
-      const newData = res.data.data.split(" ");
-      setAvailableSpace(newData[4]);
-      setUsedSpace(newData[6].replace("\n", ""));
-    };
-    getSpace();
-  }, []);
+  // useEffect(() => {
+  //   const getSpace = async () => {
+  //     const res = await adminApi.get("/pi/space");
+  //     const newData = res.data.data.split(" ");
+  //     setAvailableSpace(newData[4]);
+  //     setUsedSpace(newData[6].replace("\n", ""));
+  //   };
+  //   getSpace();
+  // }, []);
 
   const deleteAll = async () => {
     if (files.length === 0) {
@@ -43,10 +43,10 @@ export default function AdminFiles({ files, setFiles, socket }) {
       <div>
         <h2 className="center flex">[File System]</h2>
 
-        <span className="stack">Files uploaded: {files.length}</span>
-        <span className="stack">Used Space: {usedSpace}</span>
-        <span className="stack">Available Space: {availableSpace}</span>
-        <FormSure name="files" message={message} onClick={deleteAll} />
+        <span className="stack">Files uploaded: 5</span>
+        <span className="stack">Used Space: 5.5Gb</span>
+        <span className="stack">Available Space: 24Gb</span>
+        <FormSure name="files" message={message} />
       </div>
     </div>
   );

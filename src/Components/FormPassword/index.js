@@ -13,8 +13,8 @@ export default function FormPassword({ setAdmin }) {
     } else {
       const message = { password: pass };
       e.preventDefault();
-      const res = await adminApi.post("/auth", message);
-      if (res.data.match === true) {
+
+      if (pass === "ChangeMe") {
         setAdmin(true);
         setPass("");
       } else {
@@ -51,6 +51,8 @@ export default function FormPassword({ setAdmin }) {
         </button>
         {fail ? <span>Wrong Password!</span> : null}
       </form>
+      <h5>This is a static Website</h5>
+      <h5>The default password is "ChangeMe"</h5>
     </div>
   );
 }
