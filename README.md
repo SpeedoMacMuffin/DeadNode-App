@@ -5,7 +5,7 @@
 1. About
 2. Linked Repositories
 3. Tech-Stack
-4. <a name="installation">Installation</a>
+4. [Installation](#installation)
 
 ## 1. About
 
@@ -58,7 +58,7 @@ Usage:
 
 - PM2, NginX, Hostapd, Dnsmasq, RaspbianLite and Raspberry Pi are needed to create a self-contained wireless access point
 
-## 4. [Installation](#installation)
+## 4. <a name="installation">Installation</a>
 
 ---
 
