@@ -8,27 +8,27 @@ export default function Files({ socket, room, setRoom }) {
   const [newFiles, setNewFiles] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(async () => {
-    const res = await Api.get("/local");
-    const files = res.data.data;
+  useEffect(() => {
+    const getFiles = async () => {
+      const res = await Api.get("/local");
+      const files = res.data.data;
+      try {
+        files.forEach(async (file) => {
+          const res = await Api.get("/local/" + file);
 
-    // if (files.length > 0) {
-    try {
-      files.forEach(async (file) => {
-        const res = await Api.get("/local/" + file);
-
-        file = {
-          name: res.data.data.name,
-          path: res.data.data.url,
-          size: res.data.data.details.size,
-        };
-        setNewFiles((newFiles) => [...newFiles, file]);
-      });
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
-    // }
+          file = {
+            name: res.data.data.name,
+            path: res.data.data.url,
+            size: res.data.data.details.size,
+          };
+          setNewFiles((newFiles) => [...newFiles, file]);
+        });
+        setLoading(false);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getFiles();
   }, []);
 
   useEffect(() => {
@@ -61,22 +61,6 @@ export default function Files({ socket, room, setRoom }) {
       }
     });
   }, []);
-
-  // useEffect(() => {
-  //   socket.on("files-change", async () => {
-  //     const res = await Api.get("/local");
-  //     setAllFiles(res.data.data);
-  //     // setAllFiles((allFiels) => [...allFiles, file]);
-  //   });
-  // });
-  // useEffect(async () => {
-  //   try {
-  //     const res = await Api.get("/local");
-  //     setAllFiles(res.data.data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }, []);
 
   return (
     <div className="file-view">
