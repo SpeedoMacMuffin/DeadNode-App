@@ -37,8 +37,8 @@ const makePassword2Hidden = () => {
       e.preventDefault()
       console.log("open wifi!");
       
-      const res = await adminApi.put("/wifiop", { ssid: ssid, privateWifi: privateWifi });
-      console.log(res)
+      const res = await adminApi.put("/wifi/wifiop", { ssid: ssid, privateWifi: privateWifi });
+     
       
       res.data.changed
         ? setSuccess(res.data.message)
@@ -86,7 +86,7 @@ const makePassword2Hidden = () => {
             newPassKey: key2,
             privateWifi: privateWifi
           };
-          const res = await adminApi.put("/wifipriv", changeReq);
+          const res = await adminApi.put("/wifi/wifipriv", changeReq);
           console.log(res.data);
 
           res.data.changed

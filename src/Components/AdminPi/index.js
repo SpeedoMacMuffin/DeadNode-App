@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import FormWifi from "../FormWifi";
 import FormChangePW from "../FormChangePW";
 import FormSurePi from "../FormSurePi";
-import FormRequirePW from "../FormRequirePW";
 import adminApi from "../../Api/adminAPI";
 
 export default function AdminPi({ clients }) {
@@ -21,6 +20,7 @@ export default function AdminPi({ clients }) {
       setPassKey(res.data.pw);
       setPrivateWifi(res.data.required);
     };
+    getWifi()
   }, []);
   useEffect(() => {
     const getSys = async () => {
@@ -32,6 +32,7 @@ export default function AdminPi({ clients }) {
         memUsed: res.data.memoryused.replace("-", ""),
       });
     };
+    getSys()
   }, []);
 
   const shutdown = async () => {
