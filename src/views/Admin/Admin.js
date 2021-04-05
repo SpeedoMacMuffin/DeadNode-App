@@ -27,6 +27,7 @@ export default function Admin({ socket, room, setRoom, admin, setAdmin }) {
       setFiles((files) => [...files, fileName]);
     });
   }, []);
+  
   useEffect(() => {
     const getFiles = async () => {
       try {
