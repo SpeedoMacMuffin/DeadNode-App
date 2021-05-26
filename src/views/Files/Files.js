@@ -4,7 +4,7 @@ import Api from "../../Api/fileAPI";
 import LocalStorage from "../../Components/LocalStorage";
 
 export default function Files({ socket, room, setRoom }) {
-  const [allFiles, setAllFiles] = useState([]);
+  // const [allFiles, setAllFiles] = useState([]);
   const [newFiles, setNewFiles] = useState([]);
 
   useEffect(() => {
@@ -58,14 +58,14 @@ export default function Files({ socket, room, setRoom }) {
         console.log(err);
       }
     });
-  }, []);
+  }, [room, setRoom, socket]);
 
   return (
     <div className="file-view">
       <LocalStorage
         storageName="[local storage]"
         socket={socket}
-        allFiles={allFiles}
+        // allFiles={allFiles}
         newFiles={newFiles}
       />
     </div>

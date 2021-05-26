@@ -23,7 +23,7 @@ export default function LocalStorage({ socket, allFiles, newFiles }) {
     }
 
     try {
-      const res = await Api.post("/upload", formData, {
+      await Api.post("/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -36,7 +36,6 @@ export default function LocalStorage({ socket, allFiles, newFiles }) {
         },
       });
       socket.emit("file-added");
-      console.log(file);
       setTimeout(() => setUploadPercentage(0), 1000);
       setMessage(message);
       setFilename("");
@@ -51,7 +50,7 @@ export default function LocalStorage({ socket, allFiles, newFiles }) {
       <FormUpload
         onSubmit={onSubmit}
         uploadPercentage={uploadPercentage}
-        file={allFiles}
+        // file={allFiles}
         setFile={setFile}
         filename={filename}
         setFilename={setFilename}

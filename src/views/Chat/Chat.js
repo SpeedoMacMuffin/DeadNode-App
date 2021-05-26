@@ -24,10 +24,10 @@ export default function Chat({ room, setRoom, username, socket }) {
       };
       setMessages((messages) => [...messages, msg]);
     });
-  }, []);
+  }, [room, setRoom, socket]);
 
   const submit = (event) => {
-    if (content.replace(/\s/g, "") == "") {
+    if (content.replace(/\s/g, "") === "") {
       event.preventDefault();
       setContent("");
     } else {

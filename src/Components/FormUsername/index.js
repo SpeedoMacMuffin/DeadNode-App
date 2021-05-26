@@ -16,7 +16,7 @@ export default function FormUsername({
     } else {
       console.log("nope...didn't work");
     }
-  }, []);
+  }, [setUsername]);
   const validatedContent = (name) => {
     if (name.replace(/\s/g, "") === "") {
       alert("Please enter a username");
