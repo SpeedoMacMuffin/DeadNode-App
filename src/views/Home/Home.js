@@ -8,7 +8,7 @@ export default function Home({ socket, room, setRoom, username }) {
       setRoom("home");
       socket.emit("room", { room: "home" });
     }
-  }, []);
+  }, [room, setRoom, socket]);
 
   return (
     <div className="home-view">
