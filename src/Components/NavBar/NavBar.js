@@ -8,7 +8,7 @@ export default function NavBar() {
       </NavLink>
 
       <input id="bmenub" type="checkbox" className="show" />
-      <label for="bmenub" className="burger pseudo button">
+      <label htmlFor="bmenub" className="burger pseudo button">
         [Menu]
       </label>
       <div className="menu ">
